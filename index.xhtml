@@ -10,6 +10,7 @@
     <link href="static/jquery-theme/jquery-ui.css" rel="stylesheet" type="text/css"/>
     <link href="static/jquery-theme/jquery-ui-redmond.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript" src="client/lib/head.load.min.js"></script>
+
     <script type="text/javascript">
       head.js(
           // libraries
@@ -56,6 +57,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
   </head>
   <body>
+
     <!-- page-centered div following in part Billbad's answer at
          http://stackoverflow.com/questions/396145/whats-the-best-way-of-centering-a-div-vertically-with-css
       -->
@@ -137,13 +139,32 @@
         </div>
       </div>
     </div>
-    <div id="bigtable" style="display:inline">
-      <div id="svg" style="width:70%;float:left;">
-        
+    <div id="bigtable" style="display:inline;">
+      <div id="svg">
       </div>
-      <div id="classfifier" style="width:29%;float:right;">
+      <!-- <div id="classfifier" style="width:29%;float:right;">
         <h1>  </h1>
+      </div> -->
+      <div id="classify" style="margin-left: 45%">
+        <h4> label this instance:</h4>
+        <div>
+          <input id="label1" type="checkbox" style="float:left"></input>
+          <h4>.  label1</h4>
+        </div>
+        <div>
+          <input id="label2" type="checkbox" style="float:left"></input>
+          <h4>.  label2</h4>
+        </div>
+        <div>
+          <input id="label3" type="checkbox" style="float:left"></input>
+          <h4>.  label3</h4>
+        </div>
+        <button id="submitLabel" class="button-two" >
+        <span>Submit</span>
+        </button>
       </div>
+      <div id="showlabel">
+      </div> 
     </div>
     <form id="import_form" class="dialog" title="Import">
       <fieldset id="import_form_docid">

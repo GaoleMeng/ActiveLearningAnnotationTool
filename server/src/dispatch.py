@@ -36,6 +36,7 @@ from predict import suggest_span_types
 from undo import undo
 from tag import tag
 
+from submitlabel import label
 from retrainmodel import dumpy
 
 from delete import delete_document, delete_collection
@@ -72,6 +73,7 @@ DISPATCHER = {
         'deleteArc': delete_arc,
 
         'retrainmodel': dumpy,
+        'submit': label,
 
         # NOTE: search actions are redundant to allow different
         # permissions for single-document and whole-collection search.

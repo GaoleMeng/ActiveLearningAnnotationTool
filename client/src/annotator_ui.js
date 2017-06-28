@@ -2702,18 +2702,12 @@ var AnnotatorUI = (function($, window, undefined) {
       $("#retrain").click(function(){
           console.log(coll);
           console.log(doc);
-
-          
           var retrianaction = {
             action: 'retrainmodel',
             collection: coll,
             'document': doc
           }
           dispatcher.post('ajax', [retrianaction, 'retrainmodel']);
-          
-
-
-
       })
 
 
@@ -2747,6 +2741,34 @@ var AnnotatorUI = (function($, window, undefined) {
         }
         dispatcher.post('ajax', [delOptions, 'collDeleted']);
       });
+
+
+
+      $("#submitLabel").click(function(){
+          var _label1 = $('#label1').prop('checked');
+          var _label2 = $('#label2').prop('checked');
+          var _label3 = $('#label3').prop('checked');
+          dispatcher.post('ajax', [{
+            action: 'submit',
+            label1: _label1,
+            label2: _label2,
+            label3: _label3,
+            collection: coll,
+            'document': doc
+          },
+          function(response) {
+              console.log("label revised!")
+          }]);
+          // var retrianaction = {
+          //   action: 'submitlabel',
+          //   collection: coll,
+          //   'document': doc
+          // }
+          // dispatcher.post('ajax', [retrianaction, 'submitlabel']);
+
+      })
+
+
 
       /* END delete button - related */
 

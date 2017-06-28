@@ -19,3 +19,4 @@ def dumpy(collection, document):
 	Messager.error("back-end model trained")
 	return {}
 
+	
