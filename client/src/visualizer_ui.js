@@ -1659,6 +1659,12 @@ var VisualizerUI = (function($, window, undefined) {
         if (!currentForm) {
           $('#waiter').dialog('close');
         }
+
+        // $("tspan").each(function(index, ele){
+
+          
+        //  })
+
       }
 
       var onStartedRendering = function() {

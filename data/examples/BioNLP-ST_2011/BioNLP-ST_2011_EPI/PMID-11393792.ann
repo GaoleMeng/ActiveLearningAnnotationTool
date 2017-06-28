@@ -12,3 +12,9 @@ T11	Protein 1562 1571	alpha2(I)
 T12	Hydroxylation 1323 1339	overhydroxylated
 E1	Hydroxylation:T12 Theme:T7
 E2	Hydroxylation:T12 Theme:T8
+T13	Protein 1544 1552	affectin
+T14	Protein 1106 1113	dodecyl
+T15	Protein 1030 1037	proband
+T16	Entity 7 13	COL1A2
+T17	Entity 7 13	COL1A2
+T18	Protein 14 22	mutation

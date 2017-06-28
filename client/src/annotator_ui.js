@@ -102,6 +102,7 @@ var AnnotatorUI = (function($, window, undefined) {
       };
 
       var makeSelRect = function(rx, ry, rw, rh, col) {
+        console.log("blue")
         var selRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
         selRect.setAttributeNS(null, "width", rw);
         selRect.setAttributeNS(null, "height", rh);
@@ -113,6 +114,7 @@ var AnnotatorUI = (function($, window, undefined) {
 
       var onKeyDown = function(evt) {
         var code = evt.which;
+
 
         if (code === $.ui.keyCode.ESCAPE) {
           setTypeLock(false);
@@ -952,6 +954,7 @@ var AnnotatorUI = (function($, window, undefined) {
       };
 
       var rapidFillSpanTypesAndDisplayForm = function(start, end, text, types) {
+
         // variant of fillSpanTypesAndDisplayForm for rapid annotation mode
         keymap = spanKeymap;
         $('#rapid_span_selected').text(text);
@@ -969,7 +972,9 @@ var AnnotatorUI = (function($, window, undefined) {
               attr('id', 'rapid_span_' + (typeNo+1)).
               attr('value', type);
           var spanBgColor = spanTypes[type] && spanTypes[type].bgColor || '#ffffff';
+         // console.log(spanBgColor)
           spanBgColor = Util.adjustColorLightness(spanBgColor, spanBoxTextBgColorLighten);
+
           // use preferred label instead of type name if available
           var name = spanTypes[type] && spanTypes[type].name || type;
           var $label = $('<label class="span_type_label"/>').
@@ -2045,6 +2050,7 @@ var AnnotatorUI = (function($, window, undefined) {
       };
 
       var rememberSpanSettings = function(response) {
+
         spanKeymap = {};
 
         // TODO: check for exceptions in response
@@ -2090,6 +2096,12 @@ var AnnotatorUI = (function($, window, undefined) {
 
         spanForm.find('#entity_types input:radio').click(spanFormSubmitRadio);
         spanForm.find('#event_types input:radio').click(spanFormSubmitRadio);
+        console.log(doc)
+
+
+
+
+
       };
 
       var tagCurrentDocument = function(taggerId) {
@@ -2878,3 +2890,6 @@ var AnnotatorUI = (function($, window, undefined) {
 
     return AnnotatorUI;
 })(jQuery, window);
+
+
+

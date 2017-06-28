@@ -890,6 +890,7 @@ var Visualizer = (function($, window, undefined) {
           span.avgDist = span.numArcs ? span.totalDist / span.numArcs : 0;
           lastSpan = span;
 
+
           // collect fragment texts into span texts
           var fragmentTexts = [];
           $.each(span.fragments, function(fragmentNo, fragment) {
@@ -897,6 +898,11 @@ var Visualizer = (function($, window, undefined) {
             fragmentTexts.push(fragment.text);
           });
           span.text = fragmentTexts.join('');
+
+
+
+          //mark!
+          console.log(span.text)
         }); // data.spans
 
         for (var i = 0; i < 2; i++) {
@@ -1478,6 +1484,7 @@ Util.profileStart('chunks');
           var bgColor = ((spanDesc && spanDesc.bgColor) ||
                           (spanTypes.SPAN_DEFAULT &&
                           spanTypes.SPAN_DEFAULT.bgColor) || '#ffffff');
+
           if (bgColor == "hidden") {
             span.hidden = true;
             return;
@@ -2934,18 +2941,22 @@ Util.profileStart('chunkFinish');
               var yShrink = shrink * nestingAdjustYStepSize;
               var xShrink = shrink * nestingAdjustXStepSize;
               // bit lighter
-              var lightBgColor = Util.adjustColorLightness(bgColor, 0.8);
+              var lightBgColor = Util.adjustColorLightness(bgColor, 0);
               // tweak for Y start offset (and corresponding height
               // reduction): text rarely hits font max height, so this
               // tends to look better
               var yStartTweak = 1;
               // store highlight coordinates to have same mouseover highlight without recalc
+
+
               fragment.highlightPos = {
                   x: chunk.textX + (rtlmode ? (fragment.curly.from - xShrink) : (fragment.curly.from + xShrink)),
                   y: chunk.row.textY + sizes.texts.y + yShrink + yStartTweak,
                   w: fragment.curly.to - fragment.curly.from - 2*xShrink,
                   h: sizes.texts.height - 2*yShrink - yStartTweak,
               };
+
+              // finally find you!!!!! mark
               svg.rect(highlightGroup,
                   fragment.highlightPos.x, fragment.highlightPos.y,
                   fragment.highlightPos.w, fragment.highlightPos.h,
@@ -3413,6 +3424,7 @@ Util.profileStart('before render');
       }
 
       var collectionLoaded = function(response) {
+
         if (!response.exception) {
           setCollectionDefaults(response);
           eventAttributeTypes = loadAttributeTypes(response.event_attribute_types);

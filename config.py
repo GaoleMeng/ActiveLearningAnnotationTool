@@ -48,7 +48,7 @@ WORK_DIR = path_join(BASE_DIR, 'work')
 #
 #     'editor': 'annotate',
 USER_PASSWORD = {
-    'gaole': '585858',
+    'gaole': 'gaole',
 #     (add USERNAME:PASSWORD pairs below this line.)
 }
 ########## ADVANCED CONFIGURATION OPTIONS ##########
