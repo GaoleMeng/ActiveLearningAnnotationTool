@@ -2271,6 +2271,10 @@ var VisualizerUI = (function($, window, undefined) {
         return moveInFileBrowser(-1);
       });
       $('#next').button().click(function() {
+        console.log("next")
+        $('#label1').prop('checked', false);
+        $('#label2').prop('checked', false);
+        $('#label3').prop('checked', false);
         return moveInFileBrowser(+1);
       });
       $('#footer').show();
