@@ -1,6 +1,9 @@
 // -*- Mode: JavaScript; tab-width: 2; indent-tabs-mode: nil; -*-
 // vim:set ft=javascript ts=2 sw=2 sts=2 cindent:
 var AnnotatorUI = (function($, window, undefined) {
+
+
+
     var AnnotatorUI = function(dispatcher, svg) {
       var that = this;
       var arcDragOrigin = null;
@@ -2714,6 +2717,7 @@ var AnnotatorUI = (function($, window, undefined) {
       $("#retrain").click(function(){
           console.log(coll);
           console.log(doc);
+          
           var retrianaction = {
             action: 'retrainmodel',
             collection: coll,
@@ -2853,6 +2857,25 @@ var AnnotatorUI = (function($, window, undefined) {
       }
 
       var init = function() {
+        $.getJSON( "label.json", function( data ) {
+          console.log(data["num"], data[0])
+          renderdiv = $("#render")
+          for (var i = 0; i < data["num"]; i++){
+              var childdiv = document.createElement("div");
+              var checkbox = document.createElement("input")
+              checkbox.type = "checkbox";
+              var hh = i+1;
+              checkbox.id = "label" + hh;
+              checkbox.style.float = "left";
+
+              childdiv.append(checkbox);
+              var labelname = document.createElement("h4")
+              labelname.textContent = data[i];
+              childdiv.append(labelname);
+              $("#render").append(childdiv);
+          }
+        });
+
         dispatcher.post('annotationIsAvailable');
       };
 
