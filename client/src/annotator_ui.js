@@ -1334,7 +1334,7 @@ var AnnotatorUI = (function($, window, undefined) {
         // separate out possible numeric suffix from type
         var noNumArcType;
         if (arcType) {
-            var splitType = arcType.match(/^(.*?)(\d*)$/);
+            var splitType = arcType.match(/^(."T"?)(\d*)$/);
             noNumArcType = splitType[1];
         }
 
