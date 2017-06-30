@@ -33,11 +33,11 @@ def explain_instances(input_dir, output_dir):
 			ss = fulltext.split()
 
 			f = open( os.path.join(output_dir, '{}.{}'.format(inst_name, EXPLAIN_FILE_SUFFIX )), 'w' )
-			end = -2
+			end = -1
 			idx = 1
 			for i in [0,1,2,3,4]:
-				start = end + 2
-				end = start + len(ss[i]) - 1
+				start = end + 1
+				end = start + len(ss[i])
 				l = choice([1,2,3])
 				span_info = '{}:label{} {} {}'.format(EXPLAIN_PREFIX, l, start, end)
 				f.write('{}{}\t{}\t{}\n'.format( EXPLAIN_PREFIX, idx, span_info, ss[i] ))

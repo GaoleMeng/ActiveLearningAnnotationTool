@@ -1,5 +1,5 @@
-EXP1	EXP:label2 0 5	T-cell
-EXP2	EXP:label2 7 15	ubiquitin
-EXP3	EXP:label2 17 22	ligand
-EXP4	EXP:label2 24 30	affects
-EXP5	EXP:label3 32 35	cell
+S1	S:label3 0 6	T-cell
+S2	S:label3 7 16	ubiquitin
+S3	S:label2 17 23	ligand
+S4	S:label2 24 31	affects
+S5	S:label3 32 36	cell

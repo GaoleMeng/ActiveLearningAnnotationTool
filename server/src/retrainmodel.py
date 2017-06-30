@@ -24,12 +24,19 @@ def dumpy(collection, document):
 	outputann = outputpath + "/" + document + ".ann";
 
 	for filename in listdir(outputpath):
+		lines = "";
+		if filename.endswith(".ann"):
+			with open(file_path + filename, "r") as original_f:
+				for line in original_f:
+					vec = line.split("\t")
+					if (not("EXP" in vec[0]) and not("S" in vec[0])):
+						lines += line;
 		if filename.endswith(".ann"):
 			with open(outputpath + "/" + filename, "r") as f:
-				with open(file_path + filename, "a") as f1:
+				with open(file_path + filename, "w") as f1:
+					f1.write(lines);
 					for line in f:
-						f1.write(line);
-
+						f1.write(line)
 
 	# original_f = open(file_path + document + ".ann", 'a');
 	# with open(outputann, "r") as f:

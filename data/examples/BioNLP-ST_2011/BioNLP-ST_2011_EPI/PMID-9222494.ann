@@ -1,7 +1,7 @@
 T1	Protein 534 558	cysteine tRNA synthetase
 T2	Protein 1199 1223	cysteine tRNA synthetase
-EXP1	EXP:label1 0 0	A
-EXP2	EXP:label1 2 9	strategy
-EXP3	EXP:label3 11 12	of
-EXP4	EXP:label3 14 17	tRNA
-EXP5	EXP:label3 19 29	recognition
+S1	S:label2 0 1	A
+S2	S:label1 2 10	strategy
+S3	S:label1 11 13	of
+S4	S:label2 14 18	tRNA
+S5	S:label3 19 30	recognition

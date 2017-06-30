@@ -1,13 +1,8 @@
 T1	Protein 81 99	carboxypeptidase Y
 T2	Protein 310 328	carboxypeptidase Y
 T3	Protein 330 333	CPY
-EXP1	EXP:label1 0 8	Synthesis
-EXP2	EXP:label1 10 11	of
-EXP3	EXP:label1 13 36	hydroxymethylglutathione
-EXP4	EXP:label1 38 41	from
-EXP5	EXP:label3 43 53	glutathione
-EXP1	EXP:label1 0 8	Synthesis
-EXP2	EXP:label1 10 11	of
-EXP3	EXP:label2 13 36	hydroxymethylglutathione
-EXP4	EXP:label3 38 41	from
-EXP5	EXP:label1 43 53	glutathione
+S1	S:label1 0 9	Synthesis
+S2	S:label2 10 12	of
+S3	S:label1 13 37	hydroxymethylglutathione
+S4	S:label3 38 42	from
+S5	S:label3 43 54	glutathione

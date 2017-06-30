@@ -28,8 +28,8 @@ T18	Protein 1136 1138	CO
 T19	Protein 1204 1208	COP1
 T20	Protein 1230 1232	CO
 T21	Protein 1245 1247	FT
-EXP1	EXP:label2 0 12	COP1-mediated
-EXP2	EXP:label2 14 27	ubiquitination
-EXP3	EXP:label3 29 30	of
-EXP4	EXP:label2 32 39	CONSTANS
-EXP5	EXP:label1 41 42	is
+S1	S:label2 0 13	COP1-mediated
+S2	S:label2 14 28	ubiquitination
+S3	S:label3 29 31	of
+S4	S:label1 32 40	CONSTANS
+S5	S:label3 41 43	is

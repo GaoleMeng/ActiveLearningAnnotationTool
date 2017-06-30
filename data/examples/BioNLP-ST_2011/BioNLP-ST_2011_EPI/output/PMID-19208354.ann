@@ -1,5 +1,5 @@
-EXP1	EXP:label2 0 7	Impaired
-EXP2	EXP:label2 9 19	trafficking
-EXP3	EXP:label2 21 23	and
-EXP4	EXP:label2 25 35	subcellular
-EXP5	EXP:label3 37 48	localization
+S1	S:label2 0 8	Impaired
+S2	S:label1 9 20	trafficking
+S3	S:label3 21 24	and
+S4	S:label3 25 36	subcellular
+S5	S:label2 37 49	localization

@@ -1,5 +1,5 @@
-EXP1	EXP:label2 0 9	Consistent
-EXP2	EXP:label3 11 18	patterns
-EXP3	EXP:label2 20 21	of
-EXP4	EXP:label3 23 28	change
-EXP5	EXP:label1 30 35	during
+S1	S:label2 0 10	Consistent
+S2	S:label3 11 19	patterns
+S3	S:label2 20 22	of
+S4	S:label2 23 29	change
+S5	S:label3 30 36	during

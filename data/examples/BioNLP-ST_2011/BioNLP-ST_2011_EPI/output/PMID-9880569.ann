@@ -1,5 +1,5 @@
-EXP1	EXP:label1 0 8	Enzymatic
-EXP2	EXP:label3 10 24	characteristics
-EXP3	EXP:label3 26 27	of
-EXP4	EXP:label2 29 39	recombinant
-EXP5	EXP:label3 41 46	medium
+S1	S:label1 0 9	Enzymatic
+S2	S:label3 10 25	characteristics
+S3	S:label3 26 28	of
+S4	S:label2 29 40	recombinant
+S5	S:label3 41 47	medium

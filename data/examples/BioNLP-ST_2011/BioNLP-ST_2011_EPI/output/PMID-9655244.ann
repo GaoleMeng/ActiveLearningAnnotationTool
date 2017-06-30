@@ -1,5 +1,5 @@
-EXP1	EXP:label1 0 9	Production
-EXP2	EXP:label2 11 12	of
-EXP3	EXP:label2 14 24	recombinant
-EXP4	EXP:label1 26 37	hydroxylated
-EXP5	EXP:label3 39 43	human
+S1	S:label2 0 10	Production
+S2	S:label3 11 13	of
+S3	S:label1 14 25	recombinant
+S4	S:label1 26 38	hydroxylated
+S5	S:label2 39 44	human

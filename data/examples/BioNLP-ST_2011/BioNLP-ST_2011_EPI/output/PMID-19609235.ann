@@ -1,5 +1,5 @@
-EXP1	EXP:label1 0 7	Targeted
-EXP2	EXP:label1 9 19	restoration
-EXP3	EXP:label2 21 22	of
-EXP4	EXP:label1 24 37	down-regulated
-EXP5	EXP:label1 39 43	DAPK2
+S1	S:label1 0 8	Targeted
+S2	S:label1 9 20	restoration
+S3	S:label2 21 23	of
+S4	S:label2 24 38	down-regulated
+S5	S:label2 39 44	DAPK2

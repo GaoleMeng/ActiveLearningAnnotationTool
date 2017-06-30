@@ -1,5 +1,5 @@
-EXP1	EXP:label2 0 5	Canine
-EXP2	EXP:label2 7 12	COL1A2
-EXP3	EXP:label3 14 21	mutation
-EXP4	EXP:label1 23 31	resulting
-EXP5	EXP:label3 33 34	in
+S1	S:label2 0 6	Canine
+S2	S:label3 7 13	COL1A2
+S3	S:label1 14 22	mutation
+S4	S:label1 23 32	resulting
+S5	S:label1 33 35	in

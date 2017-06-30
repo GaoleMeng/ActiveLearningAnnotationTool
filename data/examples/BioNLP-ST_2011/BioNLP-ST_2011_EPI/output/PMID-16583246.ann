@@ -1,5 +1,5 @@
-EXP1	EXP:label1 0 8	Defective
-EXP2	EXP:label3 10 22	glycosylation
-EXP3	EXP:label3 24 25	of
-EXP4	EXP:label3 27 33	decorin
-EXP5	EXP:label3 35 37	and
+S1	S:label3 0 9	Defective
+S2	S:label2 10 23	glycosylation
+S3	S:label2 24 26	of
+S4	S:label2 27 34	decorin
+S5	S:label2 35 38	and

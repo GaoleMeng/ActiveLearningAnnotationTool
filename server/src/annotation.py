@@ -53,6 +53,10 @@ BIONLP_ST_2013_NORMALIZATION_RES = [
     (re_compile(r'^(Reference) Referent:(\S+) Annotation:(\S+)'), r'\1 \3 \2'),
     ]
 
+
+
+
+
 class AnnotationLineSyntaxError(Exception):
     def __init__(self, line, line_num, filepath):
         self.line = line
@@ -314,10 +318,13 @@ class Annotations(object):
         return input_files
             
     #TODO: DOC!
+
+
     def __init__(self, document, read_only=False):
         # this decides which parsing function is invoked by annotation
         # ID prefix (first letter)
         self._parse_function_by_id_prefix = {
+            'S': self._parse_textbound_annotation,
             'T': self._parse_textbound_annotation,
             'M': self._parse_modifier_annotation,
             'A': self._parse_attribute_annotation,

@@ -3,8 +3,8 @@ T2	Protein 125 130	K-ras
 T3	Protein 386 391	K-ras
 T4	Protein 514 519	K-ras
 T5	Protein 850 855	K-ras
-EXP1	EXP:label1 0 3	Beta
-EXP2	EXP:label2 5 7	1-6
-EXP3	EXP:label1 9 17	branching
-EXP4	EXP:label1 19 20	of
-EXP5	EXP:label2 22 29	N-linked
+S1	S:label2 0 4	Beta
+S2	S:label2 5 8	1-6
+S3	S:label3 9 18	branching
+S4	S:label1 19 21	of
+S5	S:label3 22 30	N-linked
