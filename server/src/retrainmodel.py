@@ -4,6 +4,9 @@ from os.path import join as path_join
 from message import Messager
 
 import os.path
+
+from os import listdir
+
 from learn.main import run
 
 def dumpy(collection, document):
@@ -20,14 +23,20 @@ def dumpy(collection, document):
 	outputlbl = outputpath + "/" + document + ".lbl";
 	outputann = outputpath + "/" + document + ".ann";
 
+	for filename in listdir(outputpath):
+		if filename.endswith(".ann"):
+			with open(outputpath + "/" + filename, "r") as f:
+				with open(file_path + filename, "a") as f1:
+					for line in f:
+						f1.write(line);
 
-	
-	original_f = open(file_path + document + ".ann", 'a');
-	with open(outputann, "r") as f:
-		for line in f:
-			original_f.write(line)
 
-	original_f.close();
+	# original_f = open(file_path + document + ".ann", 'a');
+	# with open(outputann, "r") as f:
+	# 	for line in f:
+	# 		original_f.write(line)
+
+	# original_f.close();
 	Messager.info("back-end model trained")
 	return {}
 

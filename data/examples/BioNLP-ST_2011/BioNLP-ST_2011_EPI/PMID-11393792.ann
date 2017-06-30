@@ -18,3 +18,5 @@ T15	Protein 1030 1037	proband
 T16	Entity 7 13	COL1A2
 T17	Entity 7 13	COL1A2
 T18	Protein 14 22	mutation
+T19	Random 1030 1037	proband
+T20	Random 7 13	COL1A2

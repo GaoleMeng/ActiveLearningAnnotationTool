@@ -1,5 +1,5 @@
-EXP1	EXP:label2 0 19	Grb10/Nedd4-mediated
-EXP2	EXP:label3 21 39	multiubiquitination
+EXP1	EXP:label3 0 19	Grb10/Nedd4-mediated
+EXP2	EXP:label2 21 39	multiubiquitination
 EXP3	EXP:label2 41 42	of
-EXP4	EXP:label3 44 46	the
-EXP5	EXP:label2 48 59	insulin-like
+EXP4	EXP:label1 44 46	the
+EXP5	EXP:label1 48 59	insulin-like

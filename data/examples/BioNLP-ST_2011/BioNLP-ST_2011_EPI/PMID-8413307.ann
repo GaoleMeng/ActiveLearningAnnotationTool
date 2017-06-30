@@ -22,3 +22,8 @@ T3	Protein 1202 1216	LH/CG receptor
 T4	Protein 1353 1367	LH/CG receptor
 T5	Protein 1492 1506	LH/CG receptor
 T6	Protein 1604 1618	LH/CG receptor
+EXP1	EXP:label1 0 14	Agonist-induced
+EXP2	EXP:label2 16 30	phosphorylation
+EXP3	EXP:label1 32 33	of
+EXP4	EXP:label1 35 37	the
+EXP5	EXP:label2 39 49	luteinizing

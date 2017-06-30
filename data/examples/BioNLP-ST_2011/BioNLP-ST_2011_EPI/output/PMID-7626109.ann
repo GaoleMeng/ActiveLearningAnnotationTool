@@ -1,5 +1,5 @@
 EXP1	EXP:label1 0 3	Beta
 EXP2	EXP:label2 5 7	1-6
 EXP3	EXP:label1 9 17	branching
-EXP4	EXP:label3 19 20	of
-EXP5	EXP:label1 22 29	N-linked
+EXP4	EXP:label1 19 20	of
+EXP5	EXP:label2 22 29	N-linked

@@ -20,3 +20,8 @@ T16	Protein 1080 1083	AIF
 T17	Protein 1120 1123	AIF
 T18	Protein 1253 1257	TULA
 T19	Protein 1361 1364	AIF
+EXP1	EXP:label2 0 5	T-cell
+EXP2	EXP:label2 7 15	ubiquitin
+EXP3	EXP:label2 17 22	ligand
+EXP4	EXP:label2 24 30	affects
+EXP5	EXP:label3 32 35	cell

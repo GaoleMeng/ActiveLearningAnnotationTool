@@ -1,5 +1,5 @@
-EXP1	EXP:label1 0 3	Role
-EXP2	EXP:label3 5 6	of
+EXP1	EXP:label2 0 3	Role
+EXP2	EXP:label2 5 6	of
 EXP3	EXP:label2 8 10	DNA
-EXP4	EXP:label1 12 22	methylation
-EXP5	EXP:label2 24 26	and
+EXP4	EXP:label2 12 22	methylation
+EXP5	EXP:label1 24 26	and

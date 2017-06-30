@@ -1,5 +1,5 @@
-EXP1	EXP:label2 0 0	A
-EXP2	EXP:label2 2 9	strategy
-EXP3	EXP:label1 11 12	of
+EXP1	EXP:label1 0 0	A
+EXP2	EXP:label1 2 9	strategy
+EXP3	EXP:label3 11 12	of
 EXP4	EXP:label3 14 17	tRNA
-EXP5	EXP:label2 19 29	recognition
+EXP5	EXP:label3 19 29	recognition

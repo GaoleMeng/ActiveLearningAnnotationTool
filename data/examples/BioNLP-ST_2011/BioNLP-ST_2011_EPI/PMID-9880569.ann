@@ -7,3 +7,8 @@ T6	Protein 1126 1129	P69
 T7	Protein 1257 1260	P69
 T8	Glycosylation 652 665	glycosylation
 E1	Glycosylation:T8 Theme:T4
+EXP1	EXP:label1 0 8	Enzymatic
+EXP2	EXP:label3 10 24	characteristics
+EXP3	EXP:label3 26 27	of
+EXP4	EXP:label2 29 39	recombinant
+EXP5	EXP:label3 41 46	medium

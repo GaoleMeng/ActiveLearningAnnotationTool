@@ -1,5 +1,5 @@
 EXP1	EXP:label2 0 3	TACI
-EXP2	EXP:label1 5 11	induces
-EXP3	EXP:label2 13 26	cIAP1-mediated
-EXP4	EXP:label3 28 41	ubiquitination
-EXP5	EXP:label2 43 44	of
+EXP2	EXP:label3 5 11	induces
+EXP3	EXP:label1 13 26	cIAP1-mediated
+EXP4	EXP:label2 28 41	ubiquitination
+EXP5	EXP:label3 43 44	of

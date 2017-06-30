@@ -1,5 +1,5 @@
-EXP1	EXP:label2 0 10	Association
-EXP2	EXP:label3 12 13	of
+EXP1	EXP:label3 0 10	Association
+EXP2	EXP:label2 12 13	of
 EXP3	EXP:label2 15 29	N-glycosylation
-EXP4	EXP:label1 31 32	of
+EXP4	EXP:label3 31 32	of
 EXP5	EXP:label2 34 47	apolipoprotein

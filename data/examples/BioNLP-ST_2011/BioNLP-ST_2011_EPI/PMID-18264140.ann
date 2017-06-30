@@ -36,3 +36,8 @@ T28	Protein 1275 1280	HDAC1
 T29	Protein 1450 1453	HBx
 T30	Protein 1462 1466	MTA1
 T31	Protein 1495 1506	HIF-1 alpha
+EXP1	EXP:label3 0 8	Hepatitis
+EXP2	EXP:label1 10 10	B
+EXP3	EXP:label1 12 16	virus
+EXP4	EXP:label1 18 18	X
+EXP5	EXP:label3 20 26	protein

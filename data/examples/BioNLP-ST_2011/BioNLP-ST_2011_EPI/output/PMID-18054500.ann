@@ -1,5 +1,5 @@
 EXP1	EXP:label3 0 13	Overexpression
-EXP2	EXP:label1 15 16	of
-EXP3	EXP:label1 18 37	post-translationally
-EXP4	EXP:label1 39 46	modified
+EXP2	EXP:label2 15 16	of
+EXP3	EXP:label3 18 37	post-translationally
+EXP4	EXP:label2 39 46	modified
 EXP5	EXP:label1 48 55	peptides

@@ -27,3 +27,8 @@ E2	Methylation:T13 Theme:T3 Site:T14
 E3	Methylation:T16 Theme:T5 Site:T18
 E4	Methylation:T17 Theme:T5 Site:T18
 E5	Demethylation:T20 Theme:T11
+EXP1	EXP:label2 0 9	Epigenetic
+EXP2	EXP:label3 11 21	inheritance
+EXP3	EXP:label1 23 29	through
+EXP4	EXP:label3 31 46	self-recruitment
+EXP5	EXP:label3 48 49	of
