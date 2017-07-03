@@ -19,9 +19,9 @@ from os.path import dirname, join as path_join
 # instances of the string CHANGE_ME with their appropriate values.
 # Please note that these values MUST appear in quotes, e.g. as in
 #
-# ADMIN_CONTACT_EMAIL = 'gaole@umich.edu'
+# ADMIN_CONTACT_EMAIL = 'gaole'
 # Contact email for users to use if the software encounters errors
-ADMIN_CONTACT_EMAIL = 'gaole@umich.edu'
+ADMIN_CONTACT_EMAIL = 'gaole'
 # Directories required by the brat server:
 #
 #     BASE_DIR: directory in which the server is installed

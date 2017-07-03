@@ -5,14 +5,17 @@
 import os
 
 from constants import *
+from message import Messager
+from datetime import datetime
 
 def predict_instances(feature_mat, inst_idx, label_idx, output_dir):
 	
 	# dummy implementation
-	from random import random
+	import random
+	random.seed(datetime.now())
 	for inst in inst_idx:
 		f = open( os.path.join(output_dir, '{}.{}'.format(inst, PREDICT_FILE_SUFFIX)), 'w' )
-		label_dist = [random() for i in range(3)]
+		label_dist = [random.uniform(0, 1) for i in range(3)]
 		s = sum(label_dist)
 		label_dist = [i/s for i in label_dist]
 		f.write('label1\t{}\nlabel2\t{}\nlabel3\t{}\n'.format(label_dist[0], label_dist[1], label_dist[2]))	

@@ -1,5 +1,5 @@
-S1	S:label1 0 9	Synthesis
-S2	S:label2 10 12	of
+S1	S:label3 0 9	Synthesis
+S2	S:label1 10 12	of
 S3	S:label1 13 37	hydroxymethylglutathione
-S4	S:label3 38 42	from
+S4	S:label1 38 42	from
 S5	S:label3 43 54	glutathione

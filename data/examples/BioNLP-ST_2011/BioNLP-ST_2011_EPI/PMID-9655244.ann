@@ -8,7 +8,7 @@ T3	Protein 547 551	ADH2
 T4	Protein 577 581	TRP1
 T5	Protein 812 816	URA3
 S1	S:label2 0 10	Production
-S2	S:label3 11 13	of
-S3	S:label1 14 25	recombinant
+S2	S:label2 11 13	of
+S3	S:label3 14 25	recombinant
 S4	S:label1 26 38	hydroxylated
-S5	S:label2 39 44	human
+S5	S:label1 39 44	human

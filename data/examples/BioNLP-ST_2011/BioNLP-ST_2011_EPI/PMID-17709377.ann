@@ -20,8 +20,8 @@ T16	Protein 1080 1083	AIF
 T17	Protein 1120 1123	AIF
 T18	Protein 1253 1257	TULA
 T19	Protein 1361 1364	AIF
-S1	S:label3 0 6	T-cell
-S2	S:label3 7 16	ubiquitin
-S3	S:label2 17 23	ligand
+S1	S:label1 0 6	T-cell
+S2	S:label2 7 16	ubiquitin
+S3	S:label3 17 23	ligand
 S4	S:label2 24 31	affects
-S5	S:label3 32 36	cell
+S5	S:label1 32 36	cell

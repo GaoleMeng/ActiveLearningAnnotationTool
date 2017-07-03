@@ -48,8 +48,8 @@ T31	Protein 1553 1558	Grb10
 T32	Protein 1563 1568	Nedd4
 T33	Protein 1603 1609	IGF-IR
 T34	Protein 1683 1689	IGF-IR
-S1	S:label1 0 20	Grb10/Nedd4-mediated
-S2	S:label3 21 40	multiubiquitination
+S1	S:label3 0 20	Grb10/Nedd4-mediated
+S2	S:label2 21 40	multiubiquitination
 S3	S:label2 41 43	of
 S4	S:label3 44 47	the
-S5	S:label2 48 60	insulin-like
+S5	S:label3 48 60	insulin-like

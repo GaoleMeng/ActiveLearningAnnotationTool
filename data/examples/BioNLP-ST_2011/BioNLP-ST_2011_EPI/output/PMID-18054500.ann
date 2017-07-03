@@ -1,5 +1,5 @@
-S1	S:label1 0 14	Overexpression
-S2	S:label3 15 17	of
-S3	S:label1 18 38	post-translationally
-S4	S:label3 39 47	modified
-S5	S:label2 48 56	peptides
+S1	S:label2 0 14	Overexpression
+S2	S:label2 15 17	of
+S3	S:label3 18 38	post-translationally
+S4	S:label1 39 47	modified
+S5	S:label1 48 56	peptides

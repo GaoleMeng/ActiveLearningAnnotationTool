@@ -1,5 +1,5 @@
-S1	S:label3 0 9	Defective
-S2	S:label2 10 23	glycosylation
-S3	S:label2 24 26	of
-S4	S:label2 27 34	decorin
-S5	S:label2 35 38	and
+S1	S:label1 0 9	Defective
+S2	S:label1 10 23	glycosylation
+S3	S:label3 24 26	of
+S4	S:label3 27 34	decorin
+S5	S:label1 35 38	and

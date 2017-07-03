@@ -2724,6 +2724,7 @@ var AnnotatorUI = (function($, window, undefined) {
             'document': doc
           }
           dispatcher.post('ajax', [retrianaction, 'retrainmodel']);
+          
       })
 
 

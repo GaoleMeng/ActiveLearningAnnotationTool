@@ -1,5 +1,5 @@
 S1	S:label1 0 4	Role
-S2	S:label3 5 7	of
-S3	S:label3 8 11	DNA
-S4	S:label1 12 23	methylation
+S2	S:label2 5 7	of
+S3	S:label1 8 11	DNA
+S4	S:label3 12 23	methylation
 S5	S:label3 24 27	and

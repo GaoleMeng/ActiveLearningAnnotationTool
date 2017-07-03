@@ -6,8 +6,8 @@ T5	Protein 1445 1448	Env
 T6	Protein 1547 1550	CD4
 T7	Protein 1767 1770	env
 *	Equiv T1 T2
-S1	S:label2 0 10	Consistent
-S2	S:label3 11 19	patterns
-S3	S:label2 20 22	of
-S4	S:label2 23 29	change
-S5	S:label3 30 36	during
+S1	S:label3 0 10	Consistent
+S2	S:label2 11 19	patterns
+S3	S:label1 20 22	of
+S4	S:label1 23 29	change
+S5	S:label1 30 36	during

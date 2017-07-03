@@ -48,6 +48,10 @@ var Ajax = (function($, window, undefined) {
 
               //retrain model demonstration:
               if (response.action == "retrainmodel"){
+
+                  location.reload();
+                  //dispatcher.post('messages', [[['Backend model trained', 'error']]]);
+
                   // console.log($(".background > rect:first").attr("x"));
                   // function readTextFile(file)
                   // {

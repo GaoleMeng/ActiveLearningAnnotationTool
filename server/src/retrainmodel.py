@@ -44,7 +44,7 @@ def dumpy(collection, document):
 	# 		original_f.write(line)
 
 	# original_f.close();
-	Messager.info("back-end model trained")
+	#Messager.info("back-end model trained")
 	return {}
 
 	

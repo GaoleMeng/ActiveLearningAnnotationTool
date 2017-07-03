@@ -1,5 +1,5 @@
-S1	S:label2 0 8	Impaired
-S2	S:label1 9 20	trafficking
-S3	S:label3 21 24	and
+S1	S:label3 0 8	Impaired
+S2	S:label3 9 20	trafficking
+S3	S:label1 21 24	and
 S4	S:label3 25 36	subcellular
-S5	S:label2 37 49	localization
+S5	S:label1 37 49	localization
