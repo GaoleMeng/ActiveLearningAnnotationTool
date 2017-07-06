@@ -17,7 +17,7 @@ T15	Entity 359 374	promoter-region
 T16	DNA_methylation 375 391	hypermethylation
 E1	DNA_methylation:T16 Theme:T5 Site:T15
 S1	S:label1 0 8	Targeted
-S2	S:label2 9 20	restoration
+S2	S:label3 9 20	restoration
 S3	S:label1 21 23	of
 S4	S:label1 24 38	down-regulated
 S5	S:label3 39 44	DAPK2

@@ -36,6 +36,6 @@ T24	Protein 2160 2168	biglycan
 T25	Protein 2227 2238	beta4GalT-7
 S1	S:label1 0 9	Defective
 S2	S:label1 10 23	glycosylation
-S3	S:label3 24 26	of
+S3	S:label1 24 26	of
 S4	S:label3 27 34	decorin
 S5	S:label1 35 38	and

@@ -49,7 +49,36 @@ var Ajax = (function($, window, undefined) {
               //retrain model demonstration:
               if (response.action == "retrainmodel"){
 
+                  // function readTextFile(file)
+                  // {
+                  //     var rawFile = new XMLHttpRequest();
+                  //     rawFile.open("GET", file, false);
+                  //     rawFile.onreadystatechange = function ()
+                  //     {
+                  //         if(rawFile.readyState === 4)
+                  //         {
+                  //             if(rawFile.status === 200 || rawFile.status == 0)
+                  //             {
+                  //                 var allText = rawFile.responseText;
+
+                  //                 var lines = allText.split("\n");
+                  //                 var toggle = 1;
+                  //                 var startpos = 0;
+                  //                 // console.log($(".background > rect"));
+                  //                 for (var i = 0; i < lines.length; i++){
+                  //                     if (lines[i].length != 0){
+                  //                         var vec = lines[i].split("\t");
+                  //                     }
+                  //                 }
+                  //             }
+                  //         }
+                  //     }
+                  //     rawFile.send(null);
+                  // }
+
+                  // readTextFile()
                   location.reload();
+
                   //dispatcher.post('messages', [[['Backend model trained', 'error']]]);
 
                   // console.log($(".background > rect:first").attr("x"));

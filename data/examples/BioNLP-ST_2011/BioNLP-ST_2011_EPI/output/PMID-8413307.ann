@@ -1,5 +1,5 @@
 S1	S:label1 0 15	Agonist-induced
-S2	S:label2 16 31	phosphorylation
+S2	S:label3 16 31	phosphorylation
 S3	S:label2 32 34	of
-S4	S:label2 35 38	the
-S5	S:label3 39 50	luteinizing
+S4	S:label3 35 38	the
+S5	S:label1 39 50	luteinizing

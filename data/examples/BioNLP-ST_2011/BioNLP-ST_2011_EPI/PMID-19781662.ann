@@ -42,8 +42,8 @@ E5	DNA_methylation:T28 Theme:T14 Site:T29
 E6	DNA_methylation:T31 Theme:T15 Site:T30
 E7	DNA_methylation:T33 Theme:T17 Site:T32
 E8	DNA_methylation:T35 Theme:T17 Site:T34
-S1	S:label1 0 4	Role
-S2	S:label2 5 7	of
-S3	S:label1 8 11	DNA
-S4	S:label3 12 23	methylation
-S5	S:label3 24 27	and
+S1	S:label3 0 4	Role
+S2	S:label3 5 7	of
+S3	S:label3 8 11	DNA
+S4	S:label1 12 23	methylation
+S5	S:label2 24 27	and
