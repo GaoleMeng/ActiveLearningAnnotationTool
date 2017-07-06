@@ -1,5 +1,5 @@
 S1	S:label2 0 10	Epigenetic
-S2	S:label1 11 22	inheritance
+S2	S:label3 11 22	inheritance
 S3	S:label2 23 30	through
 S4	S:label1 31 47	self-recruitment
-S5	S:label2 48 50	of
+S5	S:label1 48 50	of

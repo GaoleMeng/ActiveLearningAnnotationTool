@@ -1,8 +1,10 @@
 T1	Protein 81 99	carboxypeptidase Y
 T2	Protein 310 328	carboxypeptidase Y
 T3	Protein 330 333	CPY
-S1	S:label3 0 9	Synthesis
+T4	Entity 214 220	family
+S1	S:label1 0 9	Synthesis
 S2	S:label1 10 12	of
-S3	S:label3 13 37	hydroxymethylglutathione
-S4	S:label1 38 42	from
+S3	S:label1 13 37	hydroxymethylglutathione
+S4	S:label2 38 42	from
 S5	S:label3 43 54	glutathione
+*	Equiv T2 T3

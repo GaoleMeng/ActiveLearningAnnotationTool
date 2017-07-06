@@ -1,5 +1,5 @@
-S1	S:label2 0 4	Beta
+S1	S:label1 0 4	Beta
 S2	S:label3 5 8	1-6
 S3	S:label2 9 18	branching
 S4	S:label2 19 21	of
-S5	S:label3 22 30	N-linked
+S5	S:label2 22 30	N-linked

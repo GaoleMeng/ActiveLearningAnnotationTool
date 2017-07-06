@@ -1,5 +1,5 @@
-S1	S:label1 0 20	Grb10/Nedd4-mediated
-S2	S:label2 21 40	multiubiquitination
+S1	S:label3 0 20	Grb10/Nedd4-mediated
+S2	S:label1 21 40	multiubiquitination
 S3	S:label2 41 43	of
-S4	S:label1 44 47	the
-S5	S:label2 48 60	insulin-like
+S4	S:label2 44 47	the
+S5	S:label1 48 60	insulin-like

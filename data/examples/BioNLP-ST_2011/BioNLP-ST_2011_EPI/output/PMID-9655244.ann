@@ -1,5 +1,5 @@
 S1	S:label1 0 10	Production
-S2	S:label3 11 13	of
-S3	S:label2 14 25	recombinant
-S4	S:label3 26 38	hydroxylated
+S2	S:label1 11 13	of
+S3	S:label1 14 25	recombinant
+S4	S:label2 26 38	hydroxylated
 S5	S:label2 39 44	human

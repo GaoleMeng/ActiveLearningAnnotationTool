@@ -1,5 +1,5 @@
-S1	S:label1 0 13	COP1-mediated
+S1	S:label3 0 13	COP1-mediated
 S2	S:label2 14 28	ubiquitination
-S3	S:label3 29 31	of
-S4	S:label2 32 40	CONSTANS
-S5	S:label1 41 43	is
+S3	S:label2 29 31	of
+S4	S:label1 32 40	CONSTANS
+S5	S:label3 41 43	is
