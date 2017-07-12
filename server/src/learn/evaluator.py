@@ -3,10 +3,8 @@
 # vim:set ft=python ts=4 sw=4 sts=4 autoindent:
 
 
-from constants import *
+def compute_metrics(inst_labels, prediction):
+	return
 
-
-def train(output_dir):
-	from sparse_extract import feature_mat, i_mask, f_mask, i_target, f_target
-
-	pass
+def select_inst_queries(inst_labels, prediction):
+	return

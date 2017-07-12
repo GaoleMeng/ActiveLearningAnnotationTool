@@ -11,8 +11,8 @@ T10	Protein 1597 1600	LPH
 T11	Protein 1653 1656	LPH
 T12	Protein 1866 1869	LPH
 *	Equiv T1 T2
-S1	S:label1 0 8	Impaired
-S2	S:label3 9 20	trafficking
+S1	S:label2 0 8	Impaired
+S2	S:label2 9 20	trafficking
 S3	S:label2 21 24	and
-S4	S:label2 25 36	subcellular
-S5	S:label3 37 49	localization
+S4	S:label1 25 36	subcellular
+S5	S:label2 37 49	localization

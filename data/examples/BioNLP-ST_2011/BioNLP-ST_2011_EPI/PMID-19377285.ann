@@ -27,8 +27,8 @@ E2	Methylation:T13 Theme:T3 Site:T14
 E3	Methylation:T16 Theme:T5 Site:T18
 E4	Methylation:T17 Theme:T5 Site:T18
 E5	Demethylation:T20 Theme:T11
-S1	S:label2 0 10	Epigenetic
-S2	S:label3 11 22	inheritance
-S3	S:label2 23 30	through
+S1	S:label3 0 10	Epigenetic
+S2	S:label1 11 22	inheritance
+S3	S:label1 23 30	through
 S4	S:label1 31 47	self-recruitment
-S5	S:label1 48 50	of
+S5	S:label2 48 50	of

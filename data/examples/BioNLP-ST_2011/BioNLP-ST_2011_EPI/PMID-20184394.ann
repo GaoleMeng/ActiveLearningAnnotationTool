@@ -64,8 +64,8 @@ E2	Ubiquitination:T49 Theme:T3
 E3	Ubiquitination:T51 Theme:T29
 E4	Catalysis:T50 Theme:E3 Cause:T30
 E5	Ubiquitination:T52 Theme:T42
-S1	S:label1 0 4	TACI
-S2	S:label2 5 12	induces
-S3	S:label1 13 27	cIAP1-mediated
-S4	S:label2 28 42	ubiquitination
-S5	S:label3 43 45	of
+S1	S:label3 0 4	TACI
+S2	S:label1 5 12	induces
+S3	S:label2 13 27	cIAP1-mediated
+S4	S:label3 28 42	ubiquitination
+S5	S:label1 43 45	of

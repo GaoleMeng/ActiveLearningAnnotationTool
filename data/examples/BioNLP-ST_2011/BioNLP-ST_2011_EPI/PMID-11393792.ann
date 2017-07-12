@@ -20,8 +20,8 @@ T17	Entity 7 13	COL1A2
 T18	Protein 14 22	mutation
 T19	Random 1030 1037	proband
 T20	Random 1030 1037	proband
-S1	S:label3 0 6	Canine
+S1	S:label1 0 6	Canine
 S2	S:label1 7 13	COL1A2
-S3	S:label2 14 22	mutation
-S4	S:label2 23 32	resulting
+S3	S:label1 14 22	mutation
+S4	S:label3 23 32	resulting
 S5	S:label3 33 35	in

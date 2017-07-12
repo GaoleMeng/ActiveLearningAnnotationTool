@@ -20,7 +20,7 @@ T4	Protein 513 522	apo B-100
 T5	Protein 598 607	apo B-100
 T6	Protein 1316 1325	apo B-100
 S1	S:label1 0 11	Association
-S2	S:label1 12 14	of
-S3	S:label1 15 30	N-glycosylation
-S4	S:label2 31 33	of
+S2	S:label3 12 14	of
+S3	S:label3 15 30	N-glycosylation
+S4	S:label3 31 33	of
 S5	S:label1 34 48	apolipoprotein
