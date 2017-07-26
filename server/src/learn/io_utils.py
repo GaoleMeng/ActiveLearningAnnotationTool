@@ -2,6 +2,7 @@
 # -*- Mode: Python; tab-width: 4; indent-tabs-mode: nil; coding: utf-8; -*-
 # vim:set ft=python ts=4 sw=4 sts=4 autoindent:
 
+import sys
 import os
 import re
 import codecs
@@ -13,6 +14,7 @@ from constants import *
 # ====== reader functions =======
 
 def read_documents(input_dir):
+	sys.stderr.write('io_utils::read_documents(): loading documents as token sequences ...\n')
 	doc = {}
 	for fn in os.listdir(input_dir):
 		if fn.endswith('.{}'.format(RAWTEXT_FILE_SUFFIX)): # data file

@@ -15,7 +15,6 @@ model_dir = sys.argv[2]
 if not os.path.exists(input_dir):
 	exit('Input directory does not exist: "{}"'.format(input_dir))
 
-
 documents = read_documents(input_dir)
 inst_labels = read_instance_labels(input_dir)
 feat_labels = read_feature_labels(input_dir)

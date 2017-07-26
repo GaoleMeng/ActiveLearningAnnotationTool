@@ -2,6 +2,7 @@
 # -*- Mode: Python; tab-width: 4; indent-tabs-mode: nil; coding: utf-8; -*-
 # vim:set ft=python ts=4 sw=4 sts=4 autoindent:
 
+import sys
 import os, codecs
 import numpy as np
 import ast
@@ -255,6 +256,7 @@ class InteractiveLearner(object):
 
 		# print 'documents', documents
 
+		sys.stderr.write('learner::fit(): Extracting features ...\n')
 		if self.is_sparse:
 			self.feat_idx = get_feature_sparse(documents, feat_labels, feat_tasks)
 			self.inst_idx, self.doc = featurize_sparse(documents, self.feat_idx)
@@ -292,6 +294,7 @@ class InteractiveLearner(object):
 		# =========================================================================
 		# computational graph for training, different than the model itself. It leads to the objective value.
 
+		sys.stderr.write('learner::fit(): Building computational graph ...\n')
 		# no hidden layer
 		self.softmax_input_size = self.doc.shape[1]
 
@@ -306,22 +309,21 @@ class InteractiveLearner(object):
 
 		# if there are hidden layers, append them to encoded data
 
-
-		# ph_i_mask -> softmax
 		logits = tf.sparse_tensor_dense_matmul(X, self.W)
+		objective = tf.constant(0, dtype=tf.float32)
 
-		i_logits = tf.sparse_tensor_dense_matmul(self.ph_i_mask, logits)
-		objective = tf.reduce_sum(tf.nn.softmax_cross_entropy_with_logits(labels=self.ph_i_target, logits=i_logits))
+		if len(inst_labels) > 0:
+			i_logits = tf.sparse_tensor_dense_matmul(self.ph_i_mask, logits)
+			objective += tf.reduce_sum(tf.nn.softmax_cross_entropy_with_logits(labels=self.ph_i_target, logits=i_logits))
 
 
-		# ph_f_mask -> softmax
-		f_logits = tf.sparse_tensor_dense_matmul(self.ph_f_mask, logits)
-		objective += tf.reduce_sum(tf.nn.softmax_cross_entropy_with_logits(labels=self.ph_f_target, logits=f_logits))
+		if len(feat_labels) > 0:
+			f_logits = tf.sparse_tensor_dense_matmul(self.ph_f_mask, logits)
+			objective += tf.reduce_sum(tf.nn.softmax_cross_entropy_with_logits(labels=self.ph_f_target, logits=f_logits))
 
-		# ph_g_mask -> softmax
-
-		g_logits = tf.sparse_tensor_dense_matmul(X_g, self.W_g)
-		objective += tf.reduce_sum(tf.nn.sigmoid_cross_entropy_with_logits(labels=self.ph_g_target, logits=g_logits))
+		if len(feat_tasks) > 0:
+			g_logits = tf.sparse_tensor_dense_matmul(X_g, self.W_g)
+			objective += tf.reduce_sum(tf.nn.sigmoid_cross_entropy_with_logits(labels=self.ph_g_target, logits=g_logits))
 		
 		# build up objective: will use i_target, f_target, g_target
 
@@ -340,8 +342,10 @@ class InteractiveLearner(object):
 		init_op = tf.global_variables_initializer()
 		self.session.run(init_op)
 
+		sys.stderr.write('learner::fit(): Performing gradient descend ...\n')
 		for t in range(1, self.num_epoch + 1):
 			cost = self._batch_fit(self.doc, self.i_mask, self.i_target, self.f_mask, self.f_target, self.g_doc, self.g_target)
+			print 'epoch', t, 'cost', cost
 			
 		print 'epoch', t, 'cost', cost
 
@@ -392,13 +396,16 @@ class InteractiveLearner(object):
 
 	def _batch_fit(self, doc, i_mask, i_target, f_mask, f_target, g_doc, g_target):
 		if self.is_sparse:
-			feed_dict = {self.ph_doc: tf.SparseTensorValue(indices=doc.dict.keys(), values=doc.dict.values(), dense_shape=doc.shape),
-						 self.ph_i_mask: tf.SparseTensorValue(indices=i_mask.dict.keys(), values=i_mask.dict.values(), dense_shape=i_mask.shape),
-						 self.ph_i_target: i_target,
-						 self.ph_f_mask: tf.SparseTensorValue(indices=f_mask.dict.keys(), values=f_mask.dict.values(), dense_shape=f_mask.shape),
-						 self.ph_f_target: f_target,
-						 self.ph_g_doc: tf.SparseTensorValue(indices=g_doc.dict.keys(), values=g_doc.dict.values(), dense_shape=g_doc.shape),
-						 self.ph_g_target: g_target }
+			feed_dict = {self.ph_doc: tf.SparseTensorValue(indices=doc.dict.keys(), values=doc.dict.values(), dense_shape=doc.shape)}
+			if i_target.shape[0] > 0:
+				feed_dict[self.ph_i_mask] = tf.SparseTensorValue(indices=i_mask.dict.keys(), values=i_mask.dict.values(), dense_shape=i_mask.shape)
+				feed_dict[self.ph_i_target] = i_target
+			if f_target.shape[0] > 0:
+				feed_dict[self.ph_f_mask] = tf.SparseTensorValue(indices=f_mask.dict.keys(), values=f_mask.dict.values(), dense_shape=f_mask.shape)
+				feed_dict[self.ph_f_target] = f_target
+			if g_target.shape[0] > 0:
+				feed_dict[self.ph_g_doc] = tf.SparseTensorValue(indices=g_doc.dict.keys(), values=g_doc.dict.values(), dense_shape=g_doc.shape)
+				feed_dict[self.ph_g_target] = g_target
 
 		loss, _ = self.session.run([self.loss_op, self.train_op], feed_dict=feed_dict)
 		return loss
@@ -431,6 +438,8 @@ class InteractiveLearner(object):
 		# feed_dict = {self._documents: docs}
 		# return self.session.run(self.predict_op, feed_dict=feed_dict)
 		
+		sys.stderr.write('learner::predict(): performing prediction ...\n')
+
 		inst_idx, doc = featurize_sparse(documents, self.feat_idx)
 		
 		X = tf.sparse_placeholder(tf.float32, [None, None])
@@ -465,6 +474,7 @@ class InteractiveLearner(object):
 			val: float, importance of k-th word indicating a label
 
 		"""
+		sys.stderr.write('learner::predict(): performing explanation ...\n')
 		val_threshold = np.amax(self.model) * 0.8
 
 		exp = {}
@@ -492,7 +502,7 @@ class InteractiveLearner(object):
 		"""
 		if not os.path.exists(model_dir):
 			ValueError('learner::load_model(): model_dir does not exist: {}'.format(model_dir))
-			
+
 		main_param_path = os.path.join(model_dir, 'main_param.txt')
 		m = np.loadtxt(main_param_path)
 		if len(m.shape) == 1:
