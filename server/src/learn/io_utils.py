@@ -118,7 +118,7 @@ def write_explanation(explanation, output_dir):
 		for span, label_dict in inst_exp.items():
 			start, end, feat = span
 			for lbl, val in label_dict.items():
-				span_info = '{} {} {}'.format(lbl, start, end)
+				span_info = '{}:{:.3f} {} {}'.format(lbl, val, start, end)
 				f.write('{}{}\t{}\t{}\n'.format( EXPLAIN_PREFIX, idx, span_info, feat ))
 				idx += 1
 		f.close()

@@ -11,6 +11,8 @@ UTILITY_POSITIVE_COEFF = 1.0
 UTILITY_NEGATIVE_COEFF = -1.0
 RANKED_LIST_THRESHOLD = 0.0
 
+MAX_TOKEN_SEQUENCE_LENGTH = 500
+
 MAJORITY_PROB_MASS = 0.9
 
 def make_smooth_label_dist(labels, true_label):
@@ -23,3 +25,10 @@ def make_smooth_label_dist(labels, true_label):
 		else:
 			prob[l] = (1 - MAJORITY_PROB_MASS) / (len(labels) - 1)
 	return prob
+
+EXP_STOPWORDS = dict.fromkeys([
+"a", "an", "and", "are", "as", "at", "be", "but", "by",
+"for", "if", "in", "into", "is", "it",
+"no", "not", "of", "on", "or", "such",
+"that", "the", "their", "then", "there", "these",
+"they", "this", "to", "was", "will", "with"])

@@ -27,7 +27,7 @@ def run(input_dir, output_dir, is_sparse = True, pretrained_emb = None):
 	learner = InteractiveLearner(is_sparse = True, pretrained_emb = pretrained_emb, encoder = 'one_hot', predictor = 'one_layer')
 	learner.fit(documents, inst_labels, feat_labels, feat_tasks)
 	prediction = learner.predict(documents)
-	explanation = learner.explain(documents)
+	explanation = learner.explain(documents, documents)
 	
 	# compute metrics, rank instances in active learning
 	metrics = compute_metrics(inst_labels, prediction)

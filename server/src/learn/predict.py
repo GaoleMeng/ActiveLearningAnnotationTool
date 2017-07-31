@@ -24,11 +24,11 @@ if not os.path.exists(output_dir):
 
 documents = read_documents(input_dir)
 
-learner = InteractiveLearner(is_sparse = True, pretrained_emb = None, encoder = 'one_hot', predictor = 'one_layer')
+learner = InteractiveLearner()
 learner.load_model(model_dir)
 
 prediction = learner.predict(documents)
-explanation = learner.explain(documents)
+explanation = learner.explain(documents, documents)
 
 write_prediction(prediction, output_dir)
 write_explanation(explanation, output_dir)
