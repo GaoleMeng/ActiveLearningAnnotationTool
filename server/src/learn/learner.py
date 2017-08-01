@@ -14,6 +14,7 @@ from collections import Counter
 import scipy.sparse as sp
 
 from constants import *
+from evaluator import compute_metrics
 
 class MySparseData(object):
 	def __init__(self):
@@ -43,10 +44,11 @@ class MySparseData(object):
 			m[i, j] = v
 		return m
 
-def get_feature_idx(documents, feat_labels, feat_tasks):
+def get_feature_idx(documents, max_vocab, feat_labels, feat_tasks):
 	words = [i for l in documents.values() for i in l]
 	word_freq = sorted(Counter(words).items(), key = lambda x: x[1], reverse = True)
-	word_freq = word_freq[:10000] # we can cut features here
+	if max_vocab > 0:
+		word_freq = word_freq[:max_vocab] # cut features
 	feat_idx = dict(zip([e[0] for e in word_freq], range(len(word_freq)) ))
 	
 	# add other features
@@ -90,7 +92,7 @@ def featurize_seq(documents, feat_idx):
 def get_label_idx(inst_labels, feat_labels):
 	label_idx = {}
 	label_i = 0
-	for l_dict in inst_labels.values():
+	for l_dict in inst_labels.values() + feat_labels.values():
 		for k, v in l_dict.items():
 			if k not in label_idx:
 				label_idx[k] = label_i
@@ -104,10 +106,12 @@ def get_feat_inst_assn(inst_idx, feat_idx, feat_labels, documents):
 	for k, v in documents.items():
 		if k in inst_idx:
 			f_idx = 0
-			doc_str = '_'.join(v)
+			# doc_str = '_'.join(v)
+			v_dict = dict.fromkeys(v)
 			for f in sorted(feat_labels.keys()):
 				if f in feat_idx:
-					if f in doc_str:
+					# if f in doc_str:
+					if f in v_dict:
 						# determine the strength of association between f (feature) and v (document).
 						# future work: make it non-binary (e.g. using embedding similarity)
 						m.dict[(inst_idx[k], f_idx)] = 1.
@@ -248,6 +252,12 @@ def get_info_gain_from_predicted_labels(my_sparse, raw_pred):
 	info_gain -= np.multiply(label_prob,np.log(label_prob + 1e-50) ).sum()
 	return info_gain, label_given_feature
 
+# dense architecture definition strings
+class DenseArch(object):
+	ONE_LAYER = 'one_layer'
+	TWO_LAYER_AVG_EMB = 'two_layer:avg_emb'
+	TWO_LAYER_LSTM = 'two_layer:LSTM'
+
 class InteractiveLearner(object):
 	""" Interative learning classifier.
 
@@ -275,10 +285,6 @@ class InteractiveLearner(object):
 
 	embedding_size : int, default: 100
 		it is set to d (embedding size) if encoder = 'average'; otherwise it is the output size of LSTM layer.
-	
-	softmax_input_size : int, default: 100
-		The size of the hidden layer before the last softmax.
-		Useful if predictor = 'two_layer'
 	 	
 	Attributes
 	----------
@@ -287,39 +293,32 @@ class InteractiveLearner(object):
 	"""
 	def __init__(self, 
 		is_sparse = True, 
-		pretrained_emb = None, 
-		encoder = 'one_hot', 
-		predictor = 'one_layer',
+		pretrained_emb = None,
 		embedding_size = 100, 
-		softmax_input_size = 100,
+		dense_architecture = DenseArch.ONE_LAYER,
+		max_vocab = -1,
 
 		session = tf.Session(),
 		name = 'iLearner',
 		learning_rate = 1e-2,
-		# learning_rate = 1.0,
 		num_epoch = 100,
-		anneal_rate = 25,
-		anneal_stop_epoch = 100,
-		evaluation_interval = 10,
 		batch_size = 32,
+		validation_interval = 5,
 		random_state = 100
 		):
 
 		self.is_sparse = is_sparse
 		self.pretrained_emb = pretrained_emb
-		self.encoder_name = encoder
-		self.predictor_name = predictor
 		self.embedding_size = embedding_size
-		self.softmax_input_size = softmax_input_size
+		self.dense_architecture = dense_architecture
+		self.max_vocab = max_vocab
 		
 		self.session = session
 		self.name = name
 		self.learning_rate = learning_rate
 		self.num_epoch = num_epoch
-		self.anneal_rate = anneal_rate
-		self.anneal_stop_epoch = anneal_stop_epoch
-		self.evaluation_interval = evaluation_interval
 		self.batch_size = batch_size
+		self.validation_interval = validation_interval
 		self.random_state = random_state
 
 		self._init = tf.random_normal_initializer(stddev=0.1, dtype=tf.float32)
@@ -328,7 +327,7 @@ class InteractiveLearner(object):
 # training-related functions
 # ================================================================================================
 
-	def fit(self, documents, inst_labels, feat_labels, feat_tasks):
+	def fit(self, documents, inst_labels, feat_labels, feat_tasks, model_dir, validation_set = None):
 		""" Fit the model: encoder and predictor
 
 		Parameters
@@ -354,9 +353,12 @@ class InteractiveLearner(object):
 			Returns self.
 
 		"""
+		if len(inst_labels) == 0 and len(feat_labels) == 0:
+			sys.stderr.write('learner::fit(): neither instance label nor feature label is provided. Nothing to fit.\n')
+			return self
 		# =========================================================================
 		# extract input data
-
+		# make meta data as member variables, so that they can be accessed from outside
 		self.inst_labels = inst_labels
 		self.feat_labels = feat_labels
 		self.feat_tasks = feat_tasks
@@ -364,46 +366,53 @@ class InteractiveLearner(object):
 		# print 'documents', documents
 
 		sys.stderr.write('learner::fit(): Extracting features ...\n')
-		self.feat_idx = get_feature_idx(documents, feat_labels, feat_tasks)
+		self.feat_idx = get_feature_idx(documents, self.max_vocab, feat_labels, feat_tasks)
 
 		if self.is_sparse:
-			self.inst_idx, self.doc = featurize_bow(documents, self.feat_idx)
+			self.inst_idx, doc = featurize_bow(documents, self.feat_idx)
 		else:
 			self.feat_idx = dict([('PADDING_TOKEN',0)] + [(k, v + 1) for k, v in self.feat_idx.items()])
-			self.inst_idx, self.doc = featurize_seq(documents, self.feat_idx)
+			self.inst_idx, doc = featurize_seq(documents, self.feat_idx)
 
 		# print 'self.inst_idx', self.inst_idx
 		# print 'self.feat_idx', self.feat_idx
-		# print 'self.doc', self.doc.dict, self.doc.shape
-		# print 'self.doc', self.doc, self.doc.shape
+		# print 'doc', doc.dict, doc.shape
+		# print 'doc', doc, doc.shape
 
 		self.label_idx = get_label_idx(inst_labels, feat_labels)
 		# print 'self.label_idx', self.label_idx
 
-		self.i_target = get_i_target(self.inst_idx, self.label_idx, inst_labels)
-		# print 'self.i_target', self.i_target
+		i_target = get_i_target(self.inst_idx, self.label_idx, inst_labels)
+		# print 'i_target', i_target
 
-		self.feat_doc_assn = get_feat_inst_assn(self.inst_idx, self.feat_idx, feat_labels, documents)
-		print 'self.feat_doc_assn', self.feat_doc_assn.dict, self.feat_doc_assn.shape
+		feat_doc_assn = get_feat_inst_assn(self.inst_idx, self.feat_idx, feat_labels, documents)
+		# print 'feat_doc_assn', feat_doc_assn.dict, feat_doc_assn.shape
+		# print 'feat_doc_assn', feat_doc_assn.shape
 
-		self.f_target = get_f_target(self.feat_idx, self.label_idx, feat_labels)
+		f_target = get_f_target(self.feat_idx, self.label_idx, feat_labels)
 		# print 'feat_labels', feat_labels
-		print 'self.f_target', self.f_target
+		# print 'f_target', f_target
 		
 		if self.is_sparse:
-			self.g_doc = None
-			self.g_target = None
-			# self.g_doc = get_g_doc_bow(self.doc, self.feat_idx, feat_tasks)
-			# self.g_target = get_g_target_bow(self.doc, self.feat_idx, feat_tasks)
-			# print 'self.g_doc', self.g_doc.dict, self.g_doc.shape
+			g_doc = None
+			g_target = None
+			# g_doc = get_g_doc_bow(doc, self.feat_idx, feat_tasks)
+			# g_target = get_g_target_bow(doc, self.feat_idx, feat_tasks)
+			# print 'g_doc', g_doc.dict, g_doc.shape
 			pass
 		else:
-			self.g_doc = get_g_doc_seq(self.doc, self.feat_idx, feat_tasks)
-			self.g_target = get_g_target_seq(self.doc, self.feat_idx, feat_tasks)
-			# print 'self.g_doc', self.g_doc, self.g_doc.shape
-			# print 'self.g_target', self.g_target
+			g_doc = get_g_doc_seq(doc, self.feat_idx, feat_tasks)
+			g_target = get_g_target_seq(doc, self.feat_idx, feat_tasks)
+			# print 'g_doc', g_doc, g_doc.shape
+			# print 'g_target', g_target
 
-		self.embedding_size = len(self.label_idx) ####### experiments
+		if self.dense_architecture == 'one_layer':
+			self.embedding_size = len(self.label_idx)
+
+		if validation_set != None:
+			val_documents, val_labels = validation_set
+			val_score = -1.0
+
 		# =========================================================================
 		# computational graph for training, different than the model itself. It leads to the objective value.
 
@@ -424,35 +433,27 @@ class InteractiveLearner(object):
 
 			if len(feat_labels) > 0:
 				f_logits = tf.sparse_tensor_dense_matmul(self.ph_f_doc, self.W)
-				f_pred = tf.nn.softmax(f_logits)
-				f_pred = tf.matmul( tf.transpose(self.ph_feat_doc_assn), f_pred )
-				f_pred = f_pred / (tf.reduce_sum(f_pred, 1, keep_dims=True) + 1e-50) # normalize such that each row sums to 1
-				f_loss = -tf.reduce_sum( self.ph_f_target * tf.log(f_pred + 1e-10) )
+				f_pred = self._feature_label_dist(f_logits, self.ph_feat_doc_assn)
+				f_loss = -tf.reduce_sum( self.ph_f_target * tf.log(f_pred + 1e-10) ) # cross entropy
 				objective += tf.cond(self.ph_f_dotrain, lambda: f_loss, lambda: 0.)
 
 		else: # prepend intermediate/encoding module before softmax. Now it's just an embedding lookup. Can add LSTM.
 			if len(inst_labels) > 0:
-				# X_i = tf.sigmoid(tf.reduce_mean(tf.nn.embedding_lookup(self.W_emb, self.ph_i_doc), 1)) # [N x l x k] => [N x k]
-				# i_logits = tf.matmul(X_i, self.W)
-				
-				i_logits = tf.reduce_mean(tf.nn.embedding_lookup(self.W_emb, self.ph_i_doc), 1) # [N x l x k] => [N x k]
+				i_logits = self._dense_arch(self.W_emb, self.W, self.ph_i_doc)
 				
 				i_loss = tf.reduce_sum(tf.nn.softmax_cross_entropy_with_logits(labels=self.ph_i_target, logits=i_logits))
 				objective += tf.cond(self.ph_i_dotrain, lambda: i_loss, lambda: 0.)
 
 			if len(feat_labels) > 0:
-				X_f = tf.sigmoid(tf.reduce_mean(tf.nn.embedding_lookup(self.W_emb, self.ph_f_doc), 1)) # [N x l x k] => [N x k]
-				f_logits = tf.matmul(X_f, self.W)
-				f_pred = tf.nn.softmax(f_logits)
-				f_pred = tf.matmul( tf.transpose(self.ph_feat_doc_assn), f_pred )
-				f_pred = f_pred / (tf.reduce_sum(f_pred, 1, keep_dims=True) + 1e-50) # normalize such that each row sums to 1
+				f_logits = self._dense_arch(self.W_emb, self.W, self.ph_f_doc)
+				f_pred = self._feature_label_dist(f_logits, self.ph_feat_doc_assn)
 				f_loss = -tf.reduce_sum( self.ph_f_target * tf.log(f_pred + 1e-10) )
 				objective += tf.cond(self.ph_f_dotrain, lambda: f_loss, lambda: 0.)
 
 			if len(feat_tasks) > 0:
-				X_g = tf.sigmoid(tf.reduce_mean(tf.nn.embedding_lookup(self.W_emb, self.ph_g_doc), 2)) # [g x N x l x k] => [g x N x k]
-				g_logits = tf.matmul(X_g, self.W_g)
-				objective += tf.reduce_sum(tf.nn.sigmoid_cross_entropy_with_logits(labels=self.ph_g_target, logits=g_logits))
+				if self.dense_architecture != DenseArch.ONE_LAYER:
+					g_logits = self._dense_arch(self.W_emb, self.W_g, self.ph_g_doc, reduce_dim=2) # [g x N x l x k] => [g x N x k]
+					objective += tf.reduce_sum(tf.nn.sigmoid_cross_entropy_with_logits(labels=self.ph_g_target, logits=g_logits))
 
 		loss_op = objective
 		# =========================================================================
@@ -480,22 +481,25 @@ class InteractiveLearner(object):
 			total_cost = 0.0
 			i = 1
 			for start, end in batches:
-				cost = self._batch_fit(range(start, end), self.doc, self.i_target, self.feat_doc_assn, self.f_target, self.g_doc, self.g_target)
+				cost = self._batch_fit(range(start, end), doc, i_target, feat_doc_assn, f_target, g_doc, g_target)
 				total_cost += cost
 				# print 'batch', i, i*self.batch_size, cost
 				i += 1
 			print 'epoch', t, 'total_cost', total_cost
+			if t % self.validation_interval == 0 and validation_set != None:
+				self._refresh_model_params()
+				val_score = self._eval_validation_set(val_documents, val_labels, val_score, model_dir)
 
 		print 'epoch', t, 'total_cost', total_cost
-			
+
 		# =========================================================================
-		# extract model parameters
-		self.param_W = self.session.run(self.W)
-
-		if not self.is_sparse:
-			self.param_W_emb = self.session.run(self.W_emb)
-
-		# self.session.close()
+		if validation_set != None:
+			self._refresh_model_params()
+			val_score = self._eval_validation_set(val_documents, val_labels, val_score, model_dir)
+		else: # no validation set: save the final model
+			self._refresh_model_params()
+			self.save_model(model_dir)
+		
 		return self
 
 	# ======= internal functions =======
@@ -531,18 +535,27 @@ class InteractiveLearner(object):
 
 			self.W = tf.Variable(self._init([self.embedding_size, len(self.label_idx)], dtype=tf.float32), name="W")
 			self.W_g = tf.Variable(self._init([len(self.feat_tasks), self.embedding_size, 1], dtype=tf.float32), name="W_g")
-		
-	# model architecture is here. 'ph' = 'placeholder'
-	# it is used only if there the encoder is parametric
-	def _encoder(self, ph_doc):
-		
-		if 'average' in self.encoder_name:
-			pass
-		if 'lstm' in self.encoder_name:
-			pass
-		# encode docs as dense vectors
 
-		return ph_doc
+	# dense model architecture is here.
+	# token sequence, params -> logits before computing the final loss
+	# Note that the params can be of different types:
+	# when used in training: W_emb, W are variables
+	# when used in prediction, W_emb, W are placeholders
+	def _dense_arch(self, W_emb, W, doc, reduce_dim = 1):
+		if self.dense_architecture == DenseArch.ONE_LAYER:
+			logits = tf.reduce_mean(tf.nn.embedding_lookup(W_emb, doc), reduce_dim) # [N x l x k] => [N x k]
+		else: # elif self.dense_architecture == DenseArch.TWO_LAYER_AVG_EMB:
+			X = tf.sigmoid(tf.reduce_mean(tf.nn.embedding_lookup(W_emb, doc), reduce_dim)) # [N x l x k] => [N x k]
+			logits = tf.matmul(X, W)
+		# elif self.dense_architecture == self.TWO_LAYER_LSTM:
+			# TODO: add LSTM option, need to pass LSTM params into it.
+			# logits = ...
+		return logits
+
+	def _feature_label_dist(self, logits, feat_doc_assn):
+		f_pred = tf.matmul( tf.transpose(feat_doc_assn), tf.nn.softmax(logits) )
+		f_pred = f_pred / (tf.reduce_sum(f_pred, 1, keep_dims=True) + 1e-50) # normalize such that each row sums to 1
+		return f_pred
 
 	def _batch_fit(self, batch_indices, doc, i_target, feat_doc_assn, f_target, g_doc, g_target):
 		feed_dict = {}
@@ -623,6 +636,23 @@ class InteractiveLearner(object):
 		loss, _ = self.session.run([self.loss_op, self.train_op], feed_dict=feed_dict)
 		return loss
 
+	def _refresh_model_params(self):
+		self.param_W = self.session.run(self.W)
+		if not self.is_sparse:
+			self.param_W_emb = self.session.run(self.W_emb)
+
+	def _eval_validation_set(self, documents, labels, score, model_dir):
+		preds = self.predict(documents)
+		m = compute_metrics(labels, preds)
+		print 'validation perf.:', \
+			'accu={:.4f}'.format(m['accuracy']), \
+			'macro_p={:.4f}'.format(m['macro_avg_precision']), \
+			'macro_r={:.4f}'.format(m['macro_avg_recall'])
+		if m['accuracy'] > score:
+			score = m['accuracy']
+			self.save_model(model_dir)
+		return score
+
 # ================================================================================================
 # prediction-related functions
 # ================================================================================================
@@ -652,7 +682,7 @@ class InteractiveLearner(object):
 		# feed_dict = {self._documents: docs}
 		# return self.session.run(self.predict_op, feed_dict=feed_dict)
 		
-		sys.stderr.write('learner::predict(): performing prediction ...\n')
+		# sys.stderr.write('learner::predict(): performing prediction ...\n')
 
 		if self.is_sparse:
 			inst_idx, doc = featurize_bow(documents, self.feat_idx)
@@ -669,12 +699,7 @@ class InteractiveLearner(object):
 			X = tf.placeholder(tf.int32, [None, None])
 			W_emb = tf.placeholder(tf.float32, (len(self.feat_idx) + 1, self.embedding_size))
 			W = tf.placeholder(tf.float32, [None, None])
-			
-			# denseX = tf.sigmoid(tf.reduce_mean(tf.nn.embedding_lookup(W_emb, X), 1))
-			# logits = tf.matmul(denseX, W)
-
-			logits = tf.reduce_mean(tf.nn.embedding_lookup(W_emb, X), 1) # [N x l x k] => [N x k]
-
+			logits = self._dense_arch(W_emb, W, X)			
 			predict_proba_op = tf.nn.softmax(logits, name="predict_proba_op")
 
 			p = self.session.run(predict_proba_op, feed_dict={X: doc, W_emb: self.param_W_emb, W: self.param_W})
@@ -708,7 +733,7 @@ class InteractiveLearner(object):
 			label: str, label name
 			val: a score for the label
 		"""
-		sys.stderr.write('learner::predict(): performing explanation ...\n')
+		# sys.stderr.write('learner::explain(): performing explanation ...\n')
 
 		# strategy: explanation by feature ranking
 		# 1) generate predicted (soft) labels for auxiliary documents using current model;
@@ -718,8 +743,6 @@ class InteractiveLearner(object):
 		aux_pred = self.predict(auxiliary_documents, raw = True)
 		_, aux_doc = featurize_bow(auxiliary_documents, self.feat_idx)
 		info_gain, label_given_feat = get_info_gain_from_predicted_labels(aux_doc, aux_pred)
-
-		print 'info_gain.shape', info_gain.shape
 
 		top_feat_idx = [k for k, v in sorted(enumerate(info_gain), key = lambda x: x[1], reverse = True)]
 		reverse_feat_idx = dict([(v, k) for k, v in self.feat_idx.items()])
@@ -761,9 +784,11 @@ class InteractiveLearner(object):
 			ValueError('learner::load_model(): model_dir does not exist: {}'.format(model_dir))
 
 		hyperparam_path = os.path.join(model_dir, 'hyperparam.txt')
-		hyperparam = read_obj_from_file(hyperparam_path)
-		self.is_sparse = hyperparam['is_sparse']
-		self.embedding_size = hyperparam['embedding_size']
+		hp = read_obj_from_file(hyperparam_path)
+		self.is_sparse = hp['is_sparse']
+		self.embedding_size = hp['embedding_size']
+		self.dense_architecture = hp['dense_architecture']
+		self.max_vocab = hp['max_vocab']
 
 		param_W_path = os.path.join(model_dir, 'param_W.txt')
 		m = np.loadtxt(param_W_path)
@@ -792,6 +817,8 @@ class InteractiveLearner(object):
 
 		hyperparam = {'is_sparse': self.is_sparse
 					 ,'embedding_size': self.embedding_size
+					 ,'dense_architecture': self.dense_architecture
+					 ,'max_vocab': self.max_vocab
 					}
 		hyperparam_path = os.path.join(model_dir, 'hyperparam.txt')
 		write_obj_to_file(hyperparam, hyperparam_path)

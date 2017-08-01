@@ -80,7 +80,7 @@ def compute_metrics(label, pred):
 
 			total += 1
 		else:
-			raise ValueError ('learning_utils::recompute_metrics(): data_id {} is not predicted.'.format(id))
+			raise ValueError ('evaluator::compute_metrics(): data_id {} is not predicted.'.format(id))
 
 	# compute micro-averaged precision, recall, f1
 	all_tp = sum([d[l]['tp']  for l in d])
