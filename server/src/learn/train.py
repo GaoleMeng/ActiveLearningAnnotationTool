@@ -20,8 +20,8 @@ if not os.path.exists(input_dir):
 documents = read_documents(input_dir)
 inst_labels = read_instance_labels(input_dir)
 feat_labels = read_feature_labels(input_dir)
-feat_tasks = feat_labels.keys()
-# feat_tasks = []
+# feat_tasks = feat_labels.keys()
+feat_tasks = []
 
 valid_doc = read_documents(valid_dir)
 valid_lbl = read_instance_labels(valid_dir)
@@ -31,11 +31,11 @@ else:
 	valid_set = None
 
 if 'sparse' in param_str:
-	learner = InteractiveLearnerNaiveBayes(max_vocab = 10000, feat_label_pseudo_count = 10.)
-	# learner = InteractiveLearner(is_sparse = True, max_vocab = 10000, num_epoch = 10, batch_size = 128)
+	# learner = InteractiveLearnerNaiveBayes(max_vocab = 10000, feat_label_pseudo_count = 10.)
+	learner = InteractiveLearner(is_sparse = True, max_vocab = 10000, num_epoch = 10, batch_size = 128)
 else:
-	# learner = InteractiveLearner(is_sparse = False, max_vocab = 10000, dense_architecture = DenseArch.ONE_LAYER)
-	learner = InteractiveLearner(is_sparse = False, max_vocab = 10000, dense_architecture = DenseArch.TWO_LAYER_AVG_EMB)
+	learner = InteractiveLearner(is_sparse = False, max_vocab = 10000, dense_architecture = DenseArch.ONE_LAYER)
+	# learner = InteractiveLearner(is_sparse = False, max_vocab = 10000, dense_architecture = DenseArch.TWO_LAYER_AVG_EMB)
 
 learner.fit(documents, inst_labels, feat_labels, feat_tasks, model_dir, valid_set)
 

@@ -503,7 +503,7 @@ class InteractiveLearner(object):
 		# =========================================================================
 		if validation_set != None:
 			self._refresh_model_params()
-			self._eval_validation_set(val_documents, val_labels, val_score, model_dir)
+			self._eval_validation_set(val_documents, val_labels, val_max_perf, model_dir)
 		else: # no validation set: save the final model
 			self._refresh_model_params()
 			self.save_model(model_dir)

@@ -24,8 +24,8 @@ if not os.path.exists(output_dir):
 
 documents = read_documents(input_dir)
 
-# learner = InteractiveLearner()
-learner = InteractiveLearnerNaiveBayes()
+learner = InteractiveLearner()
+# learner = InteractiveLearnerNaiveBayes()
 learner.load_model(model_dir)
 
 prediction = learner.predict(documents)
