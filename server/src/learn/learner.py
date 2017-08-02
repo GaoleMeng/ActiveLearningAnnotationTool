@@ -59,7 +59,27 @@ def get_feature_idx(documents, max_vocab, feat_labels, feat_tasks):
 			feat_i += 1
 	return feat_idx
 
-def featurize_bow(documents, feat_idx):
+def get_feature_stats(documents, feat_idx):
+	count_vec = np.zeros(len(feat_idx))
+	doc_freq_vec = np.zeros(len(feat_idx))
+
+	for v in documents.values():
+		uniq = {}
+		for f in v:
+			if f in feat_idx:
+				fid = feat_idx[f]
+				count_vec[fid] += 1.
+				if fid not in uniq:
+					uniq[fid] = 1
+		for fid in uniq:
+			doc_freq_vec[fid] += 1.
+	return count_vec, doc_freq_vec
+
+# tf can be:
+#   'count': each dimension is a count
+#   'binary': each dimension is binary
+# if df is not None, each dimension is weighted by tfidf
+def featurize_bow(documents, feat_idx, tf = 'count', df = None):
 	inst_idx = dict(zip(sorted(documents.keys()),  range(len(documents)) ))
 	# sparse: bag of words encoding: return sparse data (counts)
 	m = MySparseData()
@@ -70,9 +90,17 @@ def featurize_bow(documents, feat_idx):
 				index = (inst_idx[k], feat_idx[f])
 				if index not in m.dict:
 					m.dict[index] = 1.
-				else: # counts
+				elif value == 'count':
 					m.dict[index] += 1.
+	if idf != None:
+		for i, j in m.dict:
+			m.dict[(i, j)] = np.log(m.dict[(i, j)] + 1) * np.log(len(inst_idx) / (idf[j] + 1.) )
+
 	return inst_idx, m
+
+def featurize_bow2(documents, feat_idx, feat_df):
+	# instead of returning a sparse matrix, return sp_ids and sp_weights
+	pass
 
 def featurize_seq(documents, feat_idx):
 	inst_idx = dict(zip(sorted(documents.keys()),  range(len(documents)) ))
@@ -257,6 +285,7 @@ def get_info_gain_from_predicted_labels(my_sparse, raw_pred):
 class DenseArch(object):
 	ONE_LAYER = 'one_layer'
 	TWO_LAYER_AVG_EMB = 'two_layer:avg_emb'
+	TWO_LAYER_TFIDF_EMB = 'two_layer:tfidf_emb'
 	TWO_LAYER_LSTM = 'two_layer:LSTM'
 
 class InteractiveLearner(object):
@@ -368,9 +397,12 @@ class InteractiveLearner(object):
 
 		sys.stderr.write('learner::fit(): Extracting features ...\n')
 		self.feat_idx = get_feature_idx(documents, self.max_vocab, feat_labels, feat_tasks)
+		_, self.feat_doc_freq = get_feature_stats(documents, self.feat_idx)
 
 		if self.is_sparse:
-			self.inst_idx, doc = featurize_bow(documents, self.feat_idx)
+			self.inst_idx, doc = featurize_bow(documents, self.feat_idx, tf = 'count', idf = self.feat_doc_freq)
+		elif self.dense_architecture == DenseArch.TWO_LAYER_TFIDF_EMB:
+			self.inst_idx, doc = featurize_seq_sp(documents, self.feat_idx)
 		else:
 			self.feat_idx = dict([('PADDING_TOKEN',0)] + [(k, v + 1) for k, v in self.feat_idx.items()])
 			self.inst_idx, doc = featurize_seq(documents, self.feat_idx)
@@ -407,7 +439,7 @@ class InteractiveLearner(object):
 			# print 'g_doc', g_doc, g_doc.shape
 			# print 'g_target', g_target
 
-		if self.dense_architecture == 'one_layer':
+		if self.dense_architecture == DenseArch.ONE_LAYER:
 			self.embedding_size = len(self.label_idx)
 
 		if validation_set != None:
@@ -549,14 +581,18 @@ class InteractiveLearner(object):
 	# Note that the params can be of different types:
 	# when used in training: W_emb, W are variables
 	# when used in prediction, W_emb, W are placeholders
-	def _dense_arch(self, W_emb, W, doc, reduce_dim = 1):
+	def _dense_arch(self, W_emb, W, doc, weights = None, reduce_dim = 1):
 		if self.dense_architecture == DenseArch.ONE_LAYER:
 			logits = tf.reduce_mean(tf.nn.embedding_lookup(W_emb, doc), reduce_dim) # [N x l x k] => [N x k]
-		else: # elif self.dense_architecture == DenseArch.TWO_LAYER_AVG_EMB:
+		elif self.dense_architecture == DenseArch.TWO_LAYER_AVG_EMB:
 			X = tf.sigmoid(tf.reduce_mean(tf.nn.embedding_lookup(W_emb, doc), reduce_dim)) # [N x l x k] => [N x k]
 			logits = tf.matmul(X, W)
-		# elif self.dense_architecture == self.TWO_LAYER_LSTM:
-			# TODO: add LSTM option, need to pass LSTM params into it.
+		elif self.dense_architecture == DenseArch.TWO_LAYER_TFIDF_EMB:
+			X = tf.sigmoid(tf.nn.embedding_lookup_sparse(W_emb, doc, weights, combiner='mean'))
+			logits = tf.matmul(X, W)
+		else:
+			exit('dense architecture {} is not supported yet.'.format(self.dense_architecture))
+			# TODO: add LSTM implementation, need to pass in LSTM params.
 			# logits = ...
 		return logits
 
@@ -696,7 +732,7 @@ class InteractiveLearner(object):
 		# sys.stderr.write('learner::predict(): performing prediction ...\n')
 
 		if self.is_sparse:
-			inst_idx, doc = featurize_bow(documents, self.feat_idx)
+			inst_idx, doc = featurize_bow(documents, self.feat_idx, tf = 'count', df = self.feat_doc_freq)
 			
 			X = tf.sparse_placeholder(tf.float32, [None, None])
 			W = tf.placeholder(tf.float32, [None, None])
@@ -849,7 +885,11 @@ class InteractiveLearner(object):
 
 		return
 
-# ========================================================================================================================
+# ===============================================================================================
+# Multinomial Naive Bayes classifier
+# Can be trained by labeled instances and features.
+# Sharing the interface of InteractiveLearner 
+
 class InteractiveLearnerNaiveBayes(InteractiveLearner):
 	def __init__(self,
 		max_vocab = -1,
@@ -895,9 +935,10 @@ class InteractiveLearnerNaiveBayes(InteractiveLearner):
 		if len(i_target.dict) > 0:
 			row_idx = [i for i, j in doc.dict.keys()]
 			col_idx = [j for i, j in doc.dict.keys()]
-			X = sp.csr_matrix( (doc.dict.values(), (col_idx, row_idx)), shape=[doc.shape[1], doc.shape[0]] )
-			# X = sp.csr_matrix( ([1.]*len(doc.dict), (col_idx, row_idx)), shape=[doc.shape[1], doc.shape[0]] )
+			X = sp.csr_matrix( (doc.dict.values(), (col_idx, row_idx)), shape=[doc.shape[1], doc.shape[0]] ) # count
+			# X = sp.csr_matrix( ([1.]*len(doc.dict), (col_idx, row_idx)), shape=[doc.shape[1], doc.shape[0]] ) # binary
 
+			# TFIDF transformation
 			X = X.log1p().multiply( np.log( doc.shape[0] / (self.doc_freq.transpose()+1.) ) )
 
 			self.param_W += X.dot(i_target.todense())
@@ -939,9 +980,10 @@ class InteractiveLearnerNaiveBayes(InteractiveLearner):
 
 		row_idx = [i for i, j in doc.dict.keys()]
 		col_idx = [j for i, j in doc.dict.keys()]
-		X_doc = sp.csr_matrix( (doc.dict.values(), (row_idx, col_idx)), shape=doc.shape )
-		# X_doc = sp.csr_matrix( ([1.]*len(doc.dict), (row_idx, col_idx)), shape=doc.shape )
+		X_doc = sp.csr_matrix( (doc.dict.values(), (row_idx, col_idx)), shape=doc.shape ) # count
+		# X_doc = sp.csr_matrix( ([1.]*len(doc.dict), (row_idx, col_idx)), shape=doc.shape ) # binary
 
+		# TFIDF transformation
 		X_doc = X_doc.log1p().multiply( np.log( doc.shape[0] / (self.doc_freq+1.) ) )
 
 		p = X_doc.dot(self.param_W)
