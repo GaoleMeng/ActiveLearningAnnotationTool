@@ -3,7 +3,7 @@
 # vim:set ft=python ts=4 sw=4 sts=4 autoindent:
 
 import sys, os
-from learner import InteractiveLearner
+from learner import InteractiveLearner, InteractiveLearnerNaiveBayes
 from io_utils import *
 
 if len(sys.argv) != 4:
@@ -24,7 +24,8 @@ if not os.path.exists(output_dir):
 
 documents = read_documents(input_dir)
 
-learner = InteractiveLearner()
+# learner = InteractiveLearner()
+learner = InteractiveLearnerNaiveBayes()
 learner.load_model(model_dir)
 
 prediction = learner.predict(documents)

@@ -13,6 +13,8 @@ RANKED_LIST_THRESHOLD = 0.0
 
 MAX_TOKEN_SEQUENCE_LENGTH = 500
 
+STOP_AFTER_VAL_PERF_DROP_COUNT = 3
+
 MAJORITY_PROB_MASS = 0.9
 
 def make_smooth_label_dist(labels, true_label):

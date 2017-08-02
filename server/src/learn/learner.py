@@ -208,6 +208,7 @@ def get_g_target_seq(main_m, feat_idx, feat_tasks):
 				for j in range(seq_len):
 					if main_m[i, j] == token_id:
 						m[task_idx, i, 0] = 1.
+						break
 			task_idx += 1
 	return m
 
@@ -411,7 +412,7 @@ class InteractiveLearner(object):
 
 		if validation_set != None:
 			val_documents, val_labels = validation_set
-			val_score = -1.0
+			val_max_perf = -1.0
 
 		# =========================================================================
 		# computational graph for training, different than the model itself. It leads to the objective value.
@@ -476,6 +477,7 @@ class InteractiveLearner(object):
 		# =========================================================================
 		# perform mini-batch SGD training
 		batches = prepare_batch_intervals(len(self.inst_idx), self.batch_size)
+		val_perf_drop_counter = 0
 		for t in range(1, self.num_epoch + 1):
 			np.random.shuffle(batches)
 			total_cost = 0.0
@@ -488,14 +490,20 @@ class InteractiveLearner(object):
 			print 'epoch', t, 'total_cost', total_cost
 			if t % self.validation_interval == 0 and validation_set != None:
 				self._refresh_model_params()
-				val_score = self._eval_validation_set(val_documents, val_labels, val_score, model_dir)
+				val_max_perf, is_lower = self._eval_validation_set(val_documents, val_labels, val_max_perf, model_dir)
+				if is_lower:
+					val_perf_drop_counter += 1
+				else: # clear counter
+					val_perf_drop_counter = 0
+				if val_perf_drop_counter >= STOP_AFTER_VAL_PERF_DROP_COUNT:
+					break
 
 		print 'epoch', t, 'total_cost', total_cost
 
 		# =========================================================================
 		if validation_set != None:
 			self._refresh_model_params()
-			val_score = self._eval_validation_set(val_documents, val_labels, val_score, model_dir)
+			self._eval_validation_set(val_documents, val_labels, val_score, model_dir)
 		else: # no validation set: save the final model
 			self._refresh_model_params()
 			self.save_model(model_dir)
@@ -641,17 +649,20 @@ class InteractiveLearner(object):
 		if not self.is_sparse:
 			self.param_W_emb = self.session.run(self.W_emb)
 
-	def _eval_validation_set(self, documents, labels, score, model_dir):
+	def _eval_validation_set(self, documents, labels, max_perf, model_dir):
 		preds = self.predict(documents)
 		m = compute_metrics(labels, preds)
 		print 'validation perf.:', \
 			'accu={:.4f}'.format(m['accuracy']), \
 			'macro_p={:.4f}'.format(m['macro_avg_precision']), \
 			'macro_r={:.4f}'.format(m['macro_avg_recall'])
-		if m['accuracy'] > score:
-			score = m['accuracy']
+		if m['accuracy'] >= max_perf:
+			max_perf = m['accuracy'] # update max perf
 			self.save_model(model_dir)
-		return score
+			is_lower = False
+		else:
+			is_lower = True
+		return max_perf, is_lower
 
 # ================================================================================================
 # prediction-related functions
@@ -838,7 +849,173 @@ class InteractiveLearner(object):
 
 		return
 
-	
+# ========================================================================================================================
+class InteractiveLearnerNaiveBayes(InteractiveLearner):
+	def __init__(self,
+		max_vocab = -1,
+		laplacian_alpha = 1. ,
+		feat_label_pseudo_count = 10.,
+
+		session = tf.Session()
+		):
+
+		self.is_sparse = True
+		self.max_vocab = max_vocab
+		self.laplacian_alpha = laplacian_alpha
+		self.feat_label_pseudo_count = feat_label_pseudo_count
+
+		self.session = session
+
+	def fit(self, documents, inst_labels, feat_labels, feat_tasks, model_dir, validation_set = None):
+		if len(inst_labels) == 0 and len(feat_labels) == 0:
+			sys.stderr.write('InteractiveLearnerNaiveBayes::fit(): neither instance label nor feature label is provided. Nothing to fit.\n')
+			return self
+		sys.stderr.write('InteractiveLearnerNaiveBayes::fit() ...\n')
+		# =========================================================================
+		# extract input data
+		self.feat_idx = get_feature_idx(documents, self.max_vocab, feat_labels, feat_tasks)
+		self.inst_idx, doc = featurize_bow(documents, self.feat_idx)
+		self.label_idx = get_label_idx(inst_labels, feat_labels)
+		i_target = get_i_target(self.inst_idx, self.label_idx, inst_labels)
+		f_target = get_f_target(self.feat_idx, self.label_idx, feat_labels)
+
+		# =========================================================================
+		# estimate nb model (TODO: add a bias term)
+
+		# laplacian prior
+		self.param_W = np.ones( (len(self.feat_idx), len(self.label_idx)) ) * self.laplacian_alpha
+		# self.param_W = np.zeros( (len(self.feat_idx), len(self.label_idx)) )
+
+		# print 'self.param_W', self.param_W
+		self.doc_freq = np.zeros( (1, doc.shape[1]) )
+		for i, j in doc.dict.keys():
+			self.doc_freq[0, j] += 1.
+
+		# accumulate counts
+		if len(i_target.dict) > 0:
+			row_idx = [i for i, j in doc.dict.keys()]
+			col_idx = [j for i, j in doc.dict.keys()]
+			X = sp.csr_matrix( (doc.dict.values(), (col_idx, row_idx)), shape=[doc.shape[1], doc.shape[0]] )
+			# X = sp.csr_matrix( ([1.]*len(doc.dict), (col_idx, row_idx)), shape=[doc.shape[1], doc.shape[0]] )
+
+			X = X.log1p().multiply( np.log( doc.shape[0] / (self.doc_freq.transpose()+1.) ) )
+
+			self.param_W += X.dot(i_target.todense())
+
+		# print 'self.param_W', self.param_W
+
+		# accumulate pseudo counts
+		row_idx = 0
+		for f in sorted(feat_labels.keys()):
+			if f in self.feat_idx:
+				self.param_W[self.feat_idx[f], :] += f_target[row_idx, :] * self.feat_label_pseudo_count
+				row_idx += 1
+
+		# print 'self.param_W', self.param_W
+
+		# normalize by column, take log
+		col_sum = self.param_W.sum(axis=0)
+		self.param_W = np.log(self.param_W) - np.log(col_sum[np.newaxis, :])
+
+		# print 'self.param_W', self.param_W
+
+		col_mean = np.mean(self.param_W, axis=0)
+		self.param_W = self.param_W - col_mean[np.newaxis, :]
+
+		# print 'self.param_W', self.param_W
+
+		# preds = self.predict(documents)
+		# m = compute_metrics(inst_labels, preds)
+		# print 'validation perf.:', \
+		# 	'accu={:.4f}'.format(m['accuracy']), \
+		# 	'macro_p={:.4f}'.format(m['macro_avg_precision']), \
+		# 	'macro_r={:.4f}'.format(m['macro_avg_recall'])
+
+		self.save_model(model_dir)
+		return self
+
+	def predict(self, documents, raw = False):
+		inst_idx, doc = featurize_bow(documents, self.feat_idx)
+
+		row_idx = [i for i, j in doc.dict.keys()]
+		col_idx = [j for i, j in doc.dict.keys()]
+		X_doc = sp.csr_matrix( (doc.dict.values(), (row_idx, col_idx)), shape=doc.shape )
+		# X_doc = sp.csr_matrix( ([1.]*len(doc.dict), (row_idx, col_idx)), shape=doc.shape )
+
+		X_doc = X_doc.log1p().multiply( np.log( doc.shape[0] / (self.doc_freq+1.) ) )
+
+		p = X_doc.dot(self.param_W)
+
+		max_col = np.max(p, axis=1)
+		p = p - max_col[:, np.newaxis]
+		p = np.exp(p)
+		sum_col = np.sum(p, axis=1)
+		p = p / sum_col[:, np.newaxis]
+
+		if raw:
+			return p
+
+		pred = {}
+		for inst_id, i in inst_idx.items():
+			pred[inst_id] = {}
+			for label_id, j in self.label_idx.items():
+				pred[inst_id][label_id] = p[i, j]
+		return pred
+
+	def explain(self, auxiliary_documents, documents_to_explain):
+		return super(InteractiveLearnerNaiveBayes, self).explain(auxiliary_documents, documents_to_explain)
+
+
+	def save_model(self, model_dir):
+		if not os.path.exists(model_dir):
+			os.makedirs(model_dir)
+
+		hyperparam = {'is_sparse': True}
+		hyperparam_path = os.path.join(model_dir, 'hyperparam.txt')
+		write_obj_to_file(hyperparam, hyperparam_path)
+
+		doc_freq_path = os.path.join(model_dir, 'doc_freq.txt')
+		np.savetxt(doc_freq_path, self.doc_freq)
+
+		param_W_path = os.path.join(model_dir, 'param_W.txt')
+		np.savetxt(param_W_path, self.param_W)
+
+		feat_map_path = os.path.join(model_dir, 'feat_idx.txt')
+		write_obj_to_file(self.feat_idx, feat_map_path)
+		
+		label_map_path = os.path.join(model_dir, 'label_idx.txt')
+		write_obj_to_file(self.label_idx, label_map_path)
+
+	def load_model(self, model_dir):
+		""" Load the model from a folder.
+		A model includes all attributes of the class
+		"""
+		if not os.path.exists(model_dir):
+			ValueError('learner::load_model(): model_dir does not exist: {}'.format(model_dir))
+
+		hyperparam_path = os.path.join(model_dir, 'hyperparam.txt')
+		hp = read_obj_from_file(hyperparam_path)
+		self.is_sparse = hp['is_sparse']
+
+		param_W_path = os.path.join(model_dir, 'param_W.txt')
+		m = np.loadtxt(param_W_path)
+		if len(m.shape) == 1:
+			m = m.reshape( (m.shape[0], 1) )
+		self.param_W = m
+
+		doc_freq_path = os.path.join(model_dir, 'doc_freq.txt')
+		m = np.loadtxt(doc_freq_path)
+		if len(m.shape) == 1:
+			m = m.reshape( (1, m.shape[0]) )
+		self.doc_freq = m
+
+		feat_map_path = os.path.join(model_dir, 'feat_idx.txt')
+		self.feat_idx = read_obj_from_file(feat_map_path)
+
+		label_map_path = os.path.join(model_dir, 'label_idx.txt')	
+		self.label_idx = read_obj_from_file(label_map_path)
+
+		return
 
 
 	

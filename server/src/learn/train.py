@@ -3,7 +3,7 @@
 # vim:set ft=python ts=4 sw=4 sts=4 autoindent:
 
 import sys, os
-from learner import InteractiveLearner, DenseArch
+from learner import InteractiveLearner, InteractiveLearnerNaiveBayes, DenseArch
 from io_utils import *
 
 if len(sys.argv) != 5:
@@ -31,7 +31,8 @@ else:
 	valid_set = None
 
 if 'sparse' in param_str:
-	learner = InteractiveLearner(is_sparse = True, max_vocab = 10000, num_epoch = 10, batch_size = 128)
+	learner = InteractiveLearnerNaiveBayes(max_vocab = 10000, feat_label_pseudo_count = 10.)
+	# learner = InteractiveLearner(is_sparse = True, max_vocab = 10000, num_epoch = 10, batch_size = 128)
 else:
 	# learner = InteractiveLearner(is_sparse = False, max_vocab = 10000, dense_architecture = DenseArch.ONE_LAYER)
 	learner = InteractiveLearner(is_sparse = False, max_vocab = 10000, dense_architecture = DenseArch.TWO_LAYER_AVG_EMB)
