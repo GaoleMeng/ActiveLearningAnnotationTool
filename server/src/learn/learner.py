@@ -15,6 +15,7 @@ import scipy.sparse as sp
 
 from constants import *
 from evaluator import compute_metrics
+from LSTMembedding import LSTMlogits
 
 class MySparseData(object):
 	def __init__(self):
@@ -305,7 +306,8 @@ class InteractiveLearner(object):
 		num_epoch = 100,
 		batch_size = 32,
 		validation_interval = 5,
-		random_state = 100
+		random_state = 100,
+		pre_trained_embedding = False
 		):
 
 		self.is_sparse = is_sparse
@@ -321,8 +323,12 @@ class InteractiveLearner(object):
 		self.batch_size = batch_size
 		self.validation_interval = validation_interval
 		self.random_state = random_state
+		self.pre_trained_embedding = pre_trained_embedding
 
 		self._init = tf.random_normal_initializer(stddev=0.1, dtype=tf.float32)
+
+		self.tmp_lstm_model = LSTMlogits();
+
 		
 # ================================================================================================
 # training-related functions
@@ -364,6 +370,7 @@ class InteractiveLearner(object):
 		self.feat_labels = feat_labels
 		self.feat_tasks = feat_tasks
 
+		
 		# print 'documents', documents
 
 		sys.stderr.write('learner::fit(): Extracting features ...\n')
@@ -378,7 +385,7 @@ class InteractiveLearner(object):
 		# print 'self.inst_idx', self.inst_idx
 		# print 'self.feat_idx', self.feat_idx
 		# print 'doc', doc.dict, doc.shape
-		# print 'doc', doc, doc.shape
+		print 'doc', doc, doc.shape
 
 		self.label_idx = get_label_idx(inst_labels, feat_labels)
 		# print 'self.label_idx', self.label_idx
@@ -549,15 +556,14 @@ class InteractiveLearner(object):
 	# Note that the params can be of different types:
 	# when used in training: W_emb, W are variables
 	# when used in prediction, W_emb, W are placeholders
-	def _dense_arch(self, W_emb, W, doc, reduce_dim = 1):
+	def _dense_arch(self, W_emb, W, doc, reduce_dim = 1, training_LSTM_out=True):
 		if self.dense_architecture == DenseArch.ONE_LAYER:
 			logits = tf.reduce_mean(tf.nn.embedding_lookup(W_emb, doc), reduce_dim) # [N x l x k] => [N x k]
-		else: # elif self.dense_architecture == DenseArch.TWO_LAYER_AVG_EMB:
+		elif self.dense_architecture == DenseArch.TWO_LAYER_AVG_EMB:
 			X = tf.sigmoid(tf.reduce_mean(tf.nn.embedding_lookup(W_emb, doc), reduce_dim)) # [N x l x k] => [N x k]
 			logits = tf.matmul(X, W)
-		# elif self.dense_architecture == self.TWO_LAYER_LSTM:
-			# TODO: add LSTM option, need to pass LSTM params into it.
-			# logits = ...
+		elif self.dense_architecture == DenseArch.TWO_LAYER_LSTM:
+			logits = tf.matmul(self.tmp_lstm_model.get_embedding(doc, W_emb), W);
 		return logits
 
 	def _feature_label_dist(self, logits, feat_doc_assn):
@@ -710,7 +716,7 @@ class InteractiveLearner(object):
 			X = tf.placeholder(tf.int32, [None, None])
 			W_emb = tf.placeholder(tf.float32, (len(self.feat_idx) + 1, self.embedding_size))
 			W = tf.placeholder(tf.float32, [None, None])
-			logits = self._dense_arch(W_emb, W, X)			
+			logits = self._dense_arch(W_emb, W, X, training_LSTM_out=False)			
 			predict_proba_op = tf.nn.softmax(logits, name="predict_proba_op")
 
 			p = self.session.run(predict_proba_op, feed_dict={X: doc, W_emb: self.param_W_emb, W: self.param_W})
