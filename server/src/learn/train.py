@@ -5,6 +5,8 @@
 import sys, os
 from learner import InteractiveLearner, InteractiveLearnerNaiveBayes, DenseArch
 from io_utils import *
+from wordEmbedding import get_embeddding_matrix;
+import numpy as np;
 
 if len(sys.argv) != 5:
 	exit('Params: param_str train_dir validation_dir model_dir')
@@ -23,6 +25,13 @@ feat_labels = read_feature_labels(input_dir)
 # feat_tasks = feat_labels.keys()
 feat_tasks = []
 
+
+# pretrained embedding:
+emb_model = get_embeddding_matrix(documents);
+emb_ma = {};
+for k, v in emb_model.wv.vocab.items():
+	emb_ma[k] = np.array(emb_model.wv[k]);
+
 valid_doc = read_documents(valid_dir)
 valid_lbl = read_instance_labels(valid_dir)
 if len(valid_lbl) > 0:
@@ -32,10 +41,9 @@ else:
 
 if 'sparse' in param_str:
 	# learner = InteractiveLearnerNaiveBayes(max_vocab = 10000, feat_label_pseudo_count = 10.)
-	learner = InteractiveLearner(is_sparse = True, max_vocab = 10000, num_epoch = 10, batch_size = 128)
+	learner = InteractiveLearner(is_sparse = True, max_vocab = 10000, num_epoch = 10, batch_size = 128, learning_rate=3e-2)
 else:
-	learner = InteractiveLearner(is_sparse = False, max_vocab = 10000, dense_architecture = DenseArch.TWO_LAYER_LSTM)
+	learner = InteractiveLearner(is_sparse = False, max_vocab = 10000, dense_architecture = DenseArch.TWO_LAYER_AVG_EMB, pretrained_emb = emb_ma, learning_rate=1e-2)
 	# learner = InteractiveLearner(is_sparse = False, max_vocab = 10000, dense_architecture = DenseArch.TWO_LAYER_AVG_EMB)
 
 learner.fit(documents, inst_labels, feat_labels, feat_tasks, model_dir, valid_set)
-

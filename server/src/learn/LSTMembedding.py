@@ -16,13 +16,14 @@ class args():
 		self.rnn_size = 100;
 
 class Model():
-	def __init__(self, args, num_layers=1):
-		# if not training:
-		# 	args.batch_size = 1;
-		# 	args.seq_length = MAX_TOKEN_SEQUENCE_LENGTH;
-		with tf.variable_scope("rnnlm"):
-			cell_fn = rnn.BasicLSTMCell;
-			self.cell = cell_fn(args.rnn_size);
+	def __init__(self, args, num_layers = 1):
+		cells = []
+		cell_fn = rnn.BasicLSTMCell;
+		for _ in range(num_layers):
+			cell = cell_fn(args.rnn_size)
+			cells.append(cell)
+		self.cell = cell = rnn.MultiRNNCell(cells, state_is_tuple=True)
+
 
 
 class LSTMlogits():
@@ -33,8 +34,11 @@ class LSTMlogits():
 	def get_embedding(self, doc, W_emb):
 		args = self.args;
 		truncted_doc = tf.slice(doc, [0, 0], [-1, args.seq_len]);
+#		truncted_doc = tf.reshape(doc, [-1, args.seq_len])
+
+
 		self.input_data = truncted_doc;
-		self.initial_state = self.model.cell.zero_state(tf.shape(doc)[0], tf.float32)
+		self.initial_state = self.model.cell.zero_state(tf.shape(truncted_doc)[0], tf.float32)
 
 		inputs = tf.nn.embedding_lookup(W_emb, self.input_data)
 
@@ -45,8 +49,17 @@ class LSTMlogits():
 
 		# output = tf.reshape(tf.concat(outputs, 1), [-1, args.rnn_size]);
 		self.text_embedding = tf.reduce_sum(outputs, 1);
+		
+		#self.text_embedding = tf.reshape(self.text_embedding, [tf.shape(self.text_embedding)[0]/(MAX_TOKEN_SEQUENCE_LENGTH/args.seq_len), MAX_TOKEN_SEQUENCE_LENGTH/args.seq_len, args.rnn_size])
+		# self.text_embedding = tf.slice(self.tmp_text_embedding, [0, 0], [, args.seq_len]);
+		#self.text_embedding = tf.reduce_sum(self.text_embedding, 1);
+		# self.reshaped = tf.reshape(self.text_embedding, [tf.shape(doc)[0], MAX_TOKEN_SEQUENCE_LENGTH/args.seq_len, args.rnn_size])
+		# self.text_embedding = tf.reduce_sum(self.reshaped, 1);
+		
 		self.last_state = last_state;
 		return self.text_embedding;
+
+
 
 
 

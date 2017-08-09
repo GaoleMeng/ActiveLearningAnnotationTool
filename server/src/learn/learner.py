@@ -1,3 +1,4 @@
+
 #!/usr/bin/env python
 # -*- Mode: Python; tab-width: 4; indent-tabs-mode: nil; coding: utf-8; -*-
 # vim:set ft=python ts=4 sw=4 sts=4 autoindent:
@@ -578,6 +579,12 @@ class InteractiveLearner(object):
 		else:
 			nil_word_slot = tf.zeros([1, self.embedding_size], dtype=tf.float32) #### zero padding variable here ...
 			A = tf.concat([ nil_word_slot, self._init([len(self.feat_idx), self.embedding_size], dtype=tf.float32) ], 0) # embedding matrix: V x k
+			if self.pretrained_emb is not None:
+				#A = tf.concat([ nil_word_slot, self._init([len(self.feat_idx), self.embedding_size], dtype=tf.float32) ], 0)
+				A = np.zeros([len(self.feat_idx)+1, self.embedding_size], dtype=np.float32);
+				for k,v in self.pretrained_emb.items():
+					if (k in self.feat_idx):
+						A[self.feat_idx[k]+1] = np.array(v);
 			self.W_emb = tf.Variable(A, name="W_emb")
 
 			self.W = tf.Variable(self._init([self.embedding_size, len(self.label_idx)], dtype=tf.float32), name="W")
@@ -748,7 +755,7 @@ class InteractiveLearner(object):
 			X = tf.placeholder(tf.int32, [None, None])
 			W_emb = tf.placeholder(tf.float32, (len(self.feat_idx) + 1, self.embedding_size))
 			W = tf.placeholder(tf.float32, [None, None])
-			logits = self._dense_arch(W_emb, W, X, training_LSTM_out=False)			
+			logits = self._dense_arch(W_emb, W, X)			
 			predict_proba_op = tf.nn.softmax(logits, name="predict_proba_op")
 
 			p = self.session.run(predict_proba_op, feed_dict={X: doc, W_emb: self.param_W_emb, W: self.param_W})
@@ -1063,6 +1070,14 @@ class InteractiveLearnerNaiveBayes(InteractiveLearner):
 
 
 	
+
+	
+
+	
+
+
+
+
 
 	
 
