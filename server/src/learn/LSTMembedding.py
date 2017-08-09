@@ -11,16 +11,23 @@ from constants import *
 
 class args():
 	def __init__(self):
-		self.seq_len = 30;
+		self.seq_len = 40;
 		self.batch_size = 32;
 		self.rnn_size = 100;
+		self.input_keep_prob = 0.5;
+		self.output_keep_prob = 0.5;
 
 class Model():
 	def __init__(self, args, num_layers = 1):
+
 		cells = []
 		cell_fn = rnn.BasicLSTMCell;
 		for _ in range(num_layers):
 			cell = cell_fn(args.rnn_size)
+			cell = rnn.DropoutWrapper(cell,
+				input_keep_prob=args.input_keep_prob,
+				output_keep_prob=args.output_keep_prob)
+
 			cells.append(cell)
 		self.cell = cell = rnn.MultiRNNCell(cells, state_is_tuple=True)
 
@@ -49,7 +56,6 @@ class LSTMlogits():
 
 		# output = tf.reshape(tf.concat(outputs, 1), [-1, args.rnn_size]);
 		self.text_embedding = tf.reduce_sum(outputs, 1);
-		
 		#self.text_embedding = tf.reshape(self.text_embedding, [tf.shape(self.text_embedding)[0]/(MAX_TOKEN_SEQUENCE_LENGTH/args.seq_len), MAX_TOKEN_SEQUENCE_LENGTH/args.seq_len, args.rnn_size])
 		# self.text_embedding = tf.slice(self.tmp_text_embedding, [0, 0], [, args.seq_len]);
 		#self.text_embedding = tf.reduce_sum(self.text_embedding, 1);

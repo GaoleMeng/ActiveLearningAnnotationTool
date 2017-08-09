@@ -418,7 +418,7 @@ class InteractiveLearner(object):
 		# print 'self.inst_idx', self.inst_idx
 		# print 'self.feat_idx', self.feat_idx
 		# print 'doc', doc.dict, doc.shape
-		print 'doc', doc, doc.shape
+		# print 'doc', doc, doc.shape
 
 		self.label_idx = get_label_idx(inst_labels, feat_labels)
 		# print 'self.label_idx', self.label_idx
@@ -581,10 +581,12 @@ class InteractiveLearner(object):
 			A = tf.concat([ nil_word_slot, self._init([len(self.feat_idx), self.embedding_size], dtype=tf.float32) ], 0) # embedding matrix: V x k
 			if self.pretrained_emb is not None:
 				#A = tf.concat([ nil_word_slot, self._init([len(self.feat_idx), self.embedding_size], dtype=tf.float32) ], 0)
-				A = np.zeros([len(self.feat_idx)+1, self.embedding_size], dtype=np.float32);
+				#A = np.random.normal([len(self.feat_idx)+1, self.embedding_size], dtype=np.float32);
+				A = np.random.normal(scale = 0.1, size = (len(self.feat_idx)+1, self.embedding_size)).astype(np.float32);
+				A[0,:] = np.zeros([1, self.embedding_size]);
 				for k,v in self.pretrained_emb.items():
 					if (k in self.feat_idx):
-						A[self.feat_idx[k]+1] = np.array(v);
+						A[self.feat_idx[k]] = np.array(v);
 			self.W_emb = tf.Variable(A, name="W_emb")
 
 			self.W = tf.Variable(self._init([self.embedding_size, len(self.label_idx)], dtype=tf.float32), name="W")
