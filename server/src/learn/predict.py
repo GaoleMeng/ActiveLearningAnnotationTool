@@ -24,12 +24,13 @@ if not os.path.exists(output_dir):
 
 documents = read_documents(input_dir)
 
-learner = InteractiveLearner()
-# learner = InteractiveLearnerNaiveBayes()
-learner.load_model(model_dir)
 
-prediction = learner.predict(documents)
-explanation = learner.explain(documents, documents)
+# learner = InteractiveLearner(training_LSTM=False)
+# # learner = InteractiveLearnerNaiveBayes()
+# learner.load_model(model_dir)
 
-write_prediction(prediction, output_dir)
-write_explanation(explanation, output_dir)
+# prediction = learner.predict(documents)
+# explanation = learner.explain(documents, documents)
+
+# write_prediction(prediction, output_dir)
+# write_explanation(explanation, output_dir)

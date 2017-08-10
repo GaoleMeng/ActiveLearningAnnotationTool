@@ -323,6 +323,8 @@ class InteractiveLearner(object):
 	
 
 	"""
+
+
 	def __init__(self, 
 		is_sparse = True, 
 		pretrained_emb = None,
@@ -337,7 +339,8 @@ class InteractiveLearner(object):
 		batch_size = 32,
 		validation_interval = 5,
 		random_state = 100,
-		pre_trained_embedding = False
+		pre_trained_embedding = False,
+		training_LSTM = True
 		):
 
 		self.is_sparse = is_sparse
@@ -356,8 +359,7 @@ class InteractiveLearner(object):
 		self.pre_trained_embedding = pre_trained_embedding
 
 		self._init = tf.random_normal_initializer(stddev=0.1, dtype=tf.float32)
-
-		self.tmp_lstm_model = LSTMlogits();
+		self.tmp_lstm_model = LSTMlogits(training_LSTM = training_LSTM);
 
 
 		
@@ -419,7 +421,25 @@ class InteractiveLearner(object):
 		# print 'self.inst_idx', self.inst_idx
 		# print 'self.feat_idx', self.feat_idx
 		# print 'doc', doc.dict, doc.shape
-		# print 'doc', doc, doc.shape
+		#print 'doc', doc[1], doc.shape
+
+		# self.seq_length = [];
+		# for i in range(len(doc)):
+		# 	toggle = 0;
+		# 	length = 0
+		# 	for j in range(len(doc[0])):
+		# 		if doc[i][j] == 0 and toggle == 0:
+		# 			toggle = 1;
+		# 		elif doc[i][j] != 0 and toggle == 1:
+		# 			toggle = 0;
+		# 		elif doc[i][j] == 0 and toggle == 1:
+		# 			length = j;
+		# 			break;
+		# 		elif j==499:
+		# 			length = 499;
+		# 			break;
+		# 	print length
+		# 	self.seq_length.append(length);
 
 		self.label_idx = get_label_idx(inst_labels, feat_labels)
 		# print 'self.label_idx', self.label_idx
@@ -605,7 +625,7 @@ class InteractiveLearner(object):
 			X = tf.sigmoid(tf.reduce_mean(tf.nn.embedding_lookup(W_emb, doc), reduce_dim)) # [N x l x k] => [N x k]
 			logits = tf.matmul(X, W)
 		elif self.dense_architecture == DenseArch.TWO_LAYER_LSTM:
-			logits = tf.matmul(self.tmp_lstm_model.get_embedding(doc, W_emb), W);
+			logits = tf.matmul(tf.sigmoid(self.tmp_lstm_model.get_embedding(doc, W_emb)), W);
 		return logits
 
 	def _feature_label_dist(self, logits, feat_doc_assn):
@@ -688,6 +708,7 @@ class InteractiveLearner(object):
 			if g_target.shape[0] > 0:
 				feed_dict[self.ph_g_doc] = g_doc[:, batch_indices, :]
 				feed_dict[self.ph_g_target] = g_target[:, batch_indices, :]
+
 
 		loss, _ = self.session.run([self.loss_op, self.train_op], feed_dict=feed_dict)
 		return loss
@@ -865,6 +886,9 @@ class InteractiveLearner(object):
 		label_map_path = os.path.join(model_dir, 'label_idx.txt')	
 		self.label_idx = read_obj_from_file(label_map_path)
 
+		# LSTM_map_path = os.path.join(model_dir, 'LSTM_model.txt');
+		# self.tmp_lstm_model = read_obj_from_file(LSTM_map_path);
+
 		return
 
 	def save_model(self, model_dir):
@@ -894,6 +918,9 @@ class InteractiveLearner(object):
 		
 		label_map_path = os.path.join(model_dir, 'label_idx.txt')
 		write_obj_to_file(self.label_idx, label_map_path)
+
+		# LSTM_map_path = os.path.join(model_dir, 'LSTM_model.txt');
+		# write_obj_to_file(self.tmp_lstm_model, LSTM_map_path);
 
 		return
 
@@ -1068,5 +1095,8 @@ class InteractiveLearnerNaiveBayes(InteractiveLearner):
 
 		label_map_path = os.path.join(model_dir, 'label_idx.txt')	
 		self.label_idx = read_obj_from_file(label_map_path)
+
+		# LSTM_map_path = os.path,join(model_dir, 'LSTM_model.txt');
+		# self.tmp_lstm_model = read_obj_from_file(LSTM_map_path);
 
 		return
