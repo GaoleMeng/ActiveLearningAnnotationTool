@@ -92,9 +92,9 @@ def featurize_bow(documents, feat_idx, tf = 'count', df = None):
 				index = (inst_idx[k], feat_idx[f])
 				if index not in m.dict:
 					m.dict[index] = 1.
-				elif value == 'count':
+				elif v == 'count':
 					m.dict[index] += 1.
-	if idf != None:
+	if df != None:
 		for i, j in m.dict:
 			m.dict[(i, j)] = np.log(m.dict[(i, j)] + 1) * np.log(len(inst_idx) / (idf[j] + 1.) )
 
@@ -359,6 +359,7 @@ class InteractiveLearner(object):
 
 		self.tmp_lstm_model = LSTMlogits();
 
+
 		
 # ================================================================================================
 # training-related functions
@@ -476,7 +477,7 @@ class InteractiveLearner(object):
 				f_logits = tf.sparse_tensor_dense_matmul(self.ph_f_doc, self.W)
 				f_pred = self._feature_label_dist(f_logits, self.ph_feat_doc_assn)
 				f_loss = -tf.reduce_sum( self.ph_f_target * tf.log(f_pred + 1e-10) ) # cross entropy
-				objective += tf.cond(self.ph_f_dotrain, lambda: f_loss, lambda: 0.)
+				objective += tf.cond(self.ph_f_dotrain, lambda: f_loss, lambda: tf.zeros([1]))
 
 		else: # prepend intermediate/encoding module before softmax. Now it's just an embedding lookup. Can add LSTM.
 			if len(inst_labels) > 0:
@@ -489,7 +490,7 @@ class InteractiveLearner(object):
 				f_logits = self._dense_arch(self.W_emb, self.W, self.ph_f_doc)
 				f_pred = self._feature_label_dist(f_logits, self.ph_feat_doc_assn)
 				f_loss = -tf.reduce_sum( self.ph_f_target * tf.log(f_pred + 1e-10) )
-				objective += tf.cond(self.ph_f_dotrain, lambda: f_loss, lambda: 0.)
+				objective += tf.cond(self.ph_f_dotrain, lambda: f_loss, lambda: tf.zeros([1]))
 
 			if len(feat_tasks) > 0:
 				if self.dense_architecture != DenseArch.ONE_LAYER:
@@ -1069,21 +1070,3 @@ class InteractiveLearnerNaiveBayes(InteractiveLearner):
 		self.label_idx = read_obj_from_file(label_map_path)
 
 		return
-
-
-	
-
-	
-
-	
-
-
-
-
-
-	
-
-	
-
-
-
