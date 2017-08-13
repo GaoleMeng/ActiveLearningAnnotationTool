@@ -328,7 +328,7 @@ class InteractiveLearner(object):
 	def __init__(self, 
 		is_sparse = True, 
 		pretrained_emb = None,
-		embedding_size = 100, 
+		embedding_size = 128, 
 		dense_architecture = DenseArch.ONE_LAYER,
 		max_vocab = -1,
 
@@ -337,7 +337,7 @@ class InteractiveLearner(object):
 		learning_rate = 1e-2,
 		num_epoch = 100,
 		batch_size = 32,
-		validation_interval = 5,
+		validation_interval = 3,
 		random_state = 100,
 		pre_trained_embedding = False,
 		training_LSTM = True

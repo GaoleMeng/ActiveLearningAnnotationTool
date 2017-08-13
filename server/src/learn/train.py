@@ -48,7 +48,7 @@ if 'sparse' in param_str:
 	# learner = InteractiveLearnerNaiveBayes(max_vocab = 10000, feat_label_pseudo_count = 10.)
 	learner = InteractiveLearner(is_sparse = True, max_vocab = 10000, num_epoch = 10, batch_size = 128, learning_rate=3e-2)
 else:
-	learner = InteractiveLearner(is_sparse = False, max_vocab = 10000, dense_architecture = archi, pretrained_emb = emb_ma, learning_rate=3e-3)
+	learner = InteractiveLearner(is_sparse = False, max_vocab = 10000, dense_architecture = archi, pretrained_emb = None, learning_rate=3e-3)
 	# learner = InteractiveLearner(is_sparse = False, max_vocab = 10000, dense_architecture = DenseArch.TWO_LAYER_AVG_EMB)
 
 learner.fit(documents, inst_labels, feat_labels, feat_tasks, model_dir, valid_set)

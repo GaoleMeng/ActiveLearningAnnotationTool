@@ -106,9 +106,9 @@ from constants import *
 
 class args():
 	def __init__(self):
-		self.seq_len = 50;
+		self.seq_len = 140;
 		self.batch_size = 32;
-		self.rnn_size = 100;
+		self.rnn_size = 128;
 		self.input_keep_prob = 0.5;
 		self.output_keep_prob = 0.5;
 		self.bi_rnn = True;
@@ -183,7 +183,8 @@ class LSTMlogits():
 						initial_state_fw = self.initial_state,
 						initial_state_bw = self.initial_state,
 						);
-					outputs = outputs[1];
+					#outputs = outputs[1];
+					outputs = tf.reduce_sum(outputs, 0);
 		else:
 			if args.bi_rnn == False:
 				with tf.variable_scope("rnnlm",reuse=True):
@@ -197,7 +198,8 @@ class LSTMlogits():
 						initial_state_fw = self.initial_state,
 						initial_state_bw = self.initial_state,
 						);
-					outputs = outputs[1];
+					#outputs = outputs[1];
+					outputs = tf.reduce_sum(outputs, 0);
 
 		# output = tf.reshape(tf.concat(outputs, 1), [-1, args.rnn_size]);
 		self.text_embedding = tf.reduce_sum(outputs, 1);
