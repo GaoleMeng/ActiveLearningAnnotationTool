@@ -14,7 +14,7 @@ def get_embeddding_matrix(documents):
 	print "training word embedding...";
 	for k, v in documents.items():
 		sentences.append(v);
-	model_doc = Word2Vec(sentences, size=128, window=5, min_count=5, workers=4)
+	model_doc = Word2Vec(sentences, size=100, window=5, min_count=5, workers=4)
 	return model_doc;
 
 

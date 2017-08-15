@@ -106,12 +106,12 @@ from constants import *
 
 class args():
 	def __init__(self):
-		self.seq_len = 140;
+		self.seq_len = 50;
 		self.batch_size = 32;
-		self.rnn_size = 128;
+		self.rnn_size = 100;
 		self.input_keep_prob = 0.5;
 		self.output_keep_prob = 0.5;
-		self.bi_rnn = True;
+		self.bi_rnn = False;
 		self.whetherattention = False;
 
 
@@ -126,6 +126,8 @@ class Model():
 				self.cell = cell_fn(args.rnn_size);
 				self.bi_cell = cell_fn(args.rnn_size)
 				print args.seq_len, args.bi_rnn;
+				self.cell = rnn.DropoutWrapper(self.cell,input_keep_prob=args.input_keep_prob)
+				self.bi_cell = rnn.DropoutWrapper(self.bi_cell,input_keep_prob=args.input_keep_prob)
 
 				if (args.whetherattention == True):
 					self.cell = tf.contrib.rnn.AttentionCellWrapper(self.cell, 50, state_is_tuple=True)
@@ -136,6 +138,8 @@ class Model():
 				self.cell = cell_fn(args.rnn_size);
 				self.bi_cell = cell_fn(args.rnn_size)
 				print args.seq_len, args.bi_rnn;
+				# self.cell = rnn.DropoutWrapper(self.cell,input_keep_prob=args.input_keep_prob,output_keep_prob=args.output_keep_prob)
+				# self.bi_cell = rnn.DropoutWrapper(self.bi_cell,input_keep_prob=args.input_keep_prob,output_keep_prob=args.output_keep_prob)
 
 				if (args.whetherattention == True):
 					self.cell = tf.contrib.rnn.AttentionCellWrapper(self.cell, 50, state_is_tuple=True)
