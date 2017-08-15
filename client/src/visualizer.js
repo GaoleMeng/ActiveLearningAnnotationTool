@@ -902,7 +902,7 @@ var Visualizer = (function($, window, undefined) {
 
 
           //mark!
-          console.log(span.text)
+          //console.log(span.text)
         }); // data.spans
 
         for (var i = 0; i < 2; i++) {
@@ -3113,6 +3113,7 @@ Util.profileStart('before render');
       };
 
       var collectionChanged = function() {
+        console.log("changed")
         isCollectionLoaded = false;
       };
 
@@ -3424,6 +3425,7 @@ Util.profileStart('before render');
       }
 
       var collectionLoaded = function(response) {
+
 
         if (!response.exception) {
           setCollectionDefaults(response);

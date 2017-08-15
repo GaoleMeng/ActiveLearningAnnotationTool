@@ -2102,9 +2102,6 @@ var AnnotatorUI = (function($, window, undefined) {
         console.log(doc)
 
 
-
-
-
       };
 
       var tagCurrentDocument = function(taggerId) {
@@ -2148,6 +2145,12 @@ var AnnotatorUI = (function($, window, undefined) {
           $('#auto_tagging_fieldset').show();
           $('#no_tagger_message').hide();
         }
+
+        console.log("haha");
+
+
+
+
       }
 
       // recursively traverses type hierarchy (entity_types or
@@ -2894,22 +2897,6 @@ var AnnotatorUI = (function($, window, undefined) {
                   }
           readTextFile(newpath)
 
-          renderdiv = $("#render")
-          for (var i = 0; i < data["num"]; i++){
-              var childdiv = document.createElement("div");
-              var checkbox = document.createElement("input")
-              checkbox.type = "checkbox";
-              var hh = i+1;
-              checkbox.id = "label" + hh;
-              checkbox.style.float = "left";
-
-              childdiv.append(checkbox);
-              var labelname = document.createElement("h4")
-              labelname.textContent = data[i] + "    =>    " + problist[i];
-
-              childdiv.append(labelname);
-              $("#render").append(childdiv);
-          }
         });
 
         dispatcher.post('annotationIsAvailable');
