@@ -3113,7 +3113,7 @@ Util.profileStart('before render');
       };
 
       var collectionChanged = function() {
-        console.log("changed")
+        
         isCollectionLoaded = false;
       };
 
