@@ -2861,43 +2861,6 @@ var AnnotatorUI = (function($, window, undefined) {
       }
 
       var init = function() {
-        // $.getJSON( "label.json", function( data ) {
-          
-        //   console.log(coll);
-        //   var newpath = "data/" + coll + "output/" + doc + ".lbl";
-        //   console.log(doc);
-        //   var problist = [];
-
-        //   function readTextFile(file)
-        //           {
-        //               var rawFile = new XMLHttpRequest();
-        //               rawFile.open("GET", file, false);
-        //               rawFile.onreadystatechange = function ()
-        //               {
-        //                   if(rawFile.readyState === 4)
-        //                   {
-        //                       if(rawFile.status === 200 || rawFile.status == 0)
-        //                       {
-        //                           var allText = rawFile.responseText;
-
-        //                           var lines = allText.split("\n");
-        //                           // console.log($(".background > rect"));
-        //                           for (var i = 0; i < lines.length; i++){
-        //                               if (lines[i].length != 0){
-
-        //                                   var vec = lines[i].split("\t");
-        //                                   console.log(vec)
-        //                                   problist.push(parseFloat(vec[1]));
-        //                               }
-        //                           }
-        //                       }
-        //                   }
-        //               }
-        //               rawFile.send(null);
-        //           }
-        //   readTextFile(newpath)
-
-        // });
 
         dispatcher.post('annotationIsAvailable');
       };

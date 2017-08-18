@@ -94,19 +94,28 @@ var Ajax = (function($, window, undefined) {
                       var griddiv = document.createElement("div");
                       var input_group_div = document.createElement("div");
                       var first_span = document.createElement("span");
-                      var 
-
+                      var second_span = document.createElement("span")
+                      var third_span = document.createElement("span");
 
                       childdiv.className = "row justify-content-md-center"
                       griddiv.className = "col-lg-4"
                       input_group_div.className = "input-group"
+                      first_span.className = "input-group-addon";
+                      second_span.className = "input-group-addon";
+                      third_span.className = "input-group-addon";
 
+                      first_span.append(checkbox);
+                      childdiv.append(griddiv);
+                      input_group_div.append(first_span);
+                      input_group_div.append(second_span);
+                      input_group_div.append(third_span);
 
+                      griddiv.append(input_group_div);
                       childdiv.append(griddiv);
 
 
-
-
+                      second_span.textContent = data[i];
+                      third_span.textContent = problist[i];
 
                       checkbox.type = "checkbox";
                       var hh = i+1;
@@ -115,36 +124,11 @@ var Ajax = (function($, window, undefined) {
                       checkbox.value = "off";
                       
                       checkbox.role = "button"
-/*
-        <div class="row justify-content-md-center">
-          <div class="col-lg-4">
-            <div class="input-group">
-              <span class="input-group-addon">
-                <input type="checkbox" aria-label="Checkbox for following text input"/>
-              </span>
-              <span class="input-group-addon">user_label_1</span>
-              <span class="input-group-addon">0.434370632454</span>
-            </div>
-          </div>
-        </div>
-        <div class="row justify-content-md-center">
-          <div class="col-lg-4">
-            <div class="input-group">
-              <span class="input-group-addon">
-                <input type="checkbox" aria-label="Checkbox for following text input"/>
-              </span>
-              <span class="input-group-addon">user_label_1</span>
-              <span class="input-group-addon">0.434370632454</span>
-            </div>
-          </div>
-        </div>
-*/
-                      childdiv.append(checkbox);
-                      var labelname = document.createElement("h4")
-                      labelname.textContent = data[i] + "    =>    " + problist[i];
 
-                      childdiv.append(labelname);
+                      childdiv.style.margin="3px"
+
                       $("#render").append(childdiv);
+                      
                   }
               });
 
