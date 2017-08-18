@@ -52,58 +52,100 @@ var Ajax = (function($, window, undefined) {
 
                 $.getJSON( "label.json", function( data ) {
           
-                coll = response.collection;
-                doc = response.document;
-                var newpath = "data/" + coll + "output/" + doc + ".lbl";
-                console.log(doc);
-                var problist = [];
+                  coll = response.collection;
+                  doc = response.document;
+                  var newpath = "data/" + coll + "output/" + doc + ".lbl";
+                  console.log(doc);
+                  var problist = [];
 
-                function readTextFile(file)
-                        {
-                            var rawFile = new XMLHttpRequest();
-                            rawFile.open("GET", file, false);
-                            rawFile.onreadystatechange = function ()
-                            {
-                                if(rawFile.readyState === 4)
-                                {
-                                    if(rawFile.status === 200 || rawFile.status == 0)
-                                    {
-                                        var allText = rawFile.responseText;
+                  function readTextFile(file)
+                          {
+                              var rawFile = new XMLHttpRequest();
+                              rawFile.open("GET", file, false);
+                              rawFile.onreadystatechange = function ()
+                              {
+                                  if(rawFile.readyState === 4)
+                                  {
+                                      if(rawFile.status === 200 || rawFile.status == 0)
+                                      {
+                                          var allText = rawFile.responseText;
 
-                                        var lines = allText.split("\n");
-                                        // console.log($(".background > rect"));
-                                        for (var i = 0; i < lines.length; i++){
-                                            if (lines[i].length != 0){
+                                          var lines = allText.split("\n");
+                                          // console.log($(".background > rect"));
+                                          for (var i = 0; i < lines.length; i++){
+                                              if (lines[i].length != 0){
+                                                  var vec = lines[i].split("\t");
+                                                  console.log(vec)
+                                                  problist.push(parseFloat(vec[1]));
+                                              }
+                                          }
+                                      }
+                                  }
+                              }
+                              rawFile.send(null);
+                          }
+                  readTextFile(newpath)
 
-                                                var vec = lines[i].split("\t");
-                                                console.log(vec)
-                                                problist.push(parseFloat(vec[1]));
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                            rawFile.send(null);
-                        }
-                readTextFile(newpath)
+                  renderdiv = $("#render")
+                  renderdiv.empty();
+                  for (var i = 0; i < data["num"]; i++){
+                      var childdiv = document.createElement("div");
+                      var checkbox = document.createElement("input")
+                      var griddiv = document.createElement("div");
+                      var input_group_div = document.createElement("div");
+                      var first_span = document.createElement("span");
+                      var 
 
-                renderdiv = $("#render")
-                renderdiv.empty();
-                for (var i = 0; i < data["num"]; i++){
-                    var childdiv = document.createElement("div");
-                    var checkbox = document.createElement("input")
-                    checkbox.type = "checkbox";
-                    var hh = i+1;
-                    checkbox.id = "label" + hh;
-                    checkbox.style.float = "left";
 
-                    childdiv.append(checkbox);
-                    var labelname = document.createElement("h4")
-                    labelname.textContent = data[i] + "    =>    " + problist[i];
+                      childdiv.className = "row justify-content-md-center"
+                      griddiv.className = "col-lg-4"
+                      input_group_div.className = "input-group"
 
-                    childdiv.append(labelname);
-                    $("#render").append(childdiv);
-                }
+
+                      childdiv.append(griddiv);
+
+
+
+
+
+                      checkbox.type = "checkbox";
+                      var hh = i+1;
+                      checkbox.id = "label" + hh;
+                      checkbox.style.float = "left";
+                      checkbox.value = "off";
+                      
+                      checkbox.role = "button"
+/*
+        <div class="row justify-content-md-center">
+          <div class="col-lg-4">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <input type="checkbox" aria-label="Checkbox for following text input"/>
+              </span>
+              <span class="input-group-addon">user_label_1</span>
+              <span class="input-group-addon">0.434370632454</span>
+            </div>
+          </div>
+        </div>
+        <div class="row justify-content-md-center">
+          <div class="col-lg-4">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <input type="checkbox" aria-label="Checkbox for following text input"/>
+              </span>
+              <span class="input-group-addon">user_label_1</span>
+              <span class="input-group-addon">0.434370632454</span>
+            </div>
+          </div>
+        </div>
+*/
+                      childdiv.append(checkbox);
+                      var labelname = document.createElement("h4")
+                      labelname.textContent = data[i] + "    =>    " + problist[i];
+
+                      childdiv.append(labelname);
+                      $("#render").append(childdiv);
+                  }
               });
 
               }

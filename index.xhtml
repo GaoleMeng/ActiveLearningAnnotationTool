@@ -54,6 +54,8 @@
     </script>
     <link rel="stylesheet" type="text/css" href="static/style-vis.css"/>
     <link rel="stylesheet" type="text/css" href="static/style-ui.css"/>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous"/>
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
   </head>
   <body>
@@ -145,10 +147,20 @@
       <!-- <div id="classfifier" style="width:29%;float:right;">
         <h1>  </h1>
       </div> -->
-      <div id="classify" style="margin-left: 45%">
-        <h4> label this instance:</h4>
+      <div id="classify">
+        <div class="row justify-content-md-center">
+          <div class="col-lg-4">
+            <h4> Instances Label: </h4>
+          </div>
+        </div>
+
+
+
+
 
         <div id="render">
+          
+
 <!-- 
 
           <div>
@@ -167,7 +179,7 @@
            -->
         </div>
 
-        <input id="submitLabel" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" type="button" value="Options" tabindex="-1" title="Submit button for the instance"/>
+        <input id="submitLabel" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" type="button" value="Submit" tabindex="-1" title="Submit button for the instance"/>
         <!-- <button id="submitLabel" class="button-two" > -->
         <!-- <span>Submit</span>
         </button> -->
