@@ -90,6 +90,8 @@ def get_statistics(directory, base_names, use_cache=True):
 
     if options_get_validation(directory) != 'none':
         stat_types.append(("Issues", "int"))
+
+    stat_types.append(("Uncertainty", "float"))
             
     if generate:
         # Generate the document statistics from scratch

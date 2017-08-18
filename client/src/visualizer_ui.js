@@ -806,6 +806,9 @@ var VisualizerUI = (function($, window, undefined) {
         // disabling this as a test. If everything works, just remove
         // the following commented-out line (and this comment):
         //selectorData.items.sort(docSortFunction);
+
+
+
         $.each(selectorData.items, function(docNo, doc) {
           var isColl = doc[0] == "c"; // "collection"
           // second column is optional annotation-specific pointer,
@@ -817,6 +820,15 @@ var VisualizerUI = (function($, window, undefined) {
           //var collFileImg = isColl ? 'Fugue-folder-horizontal-open.png' : 'Fugue-document.png';
           var collFileImg = isColl ? 'Fugue-shadowless-folder-horizontal-open.png' : 'Fugue-shadowless-document.png';
           var collSuffix = isColl ? '/' : '';
+          
+
+          //console.log(doc);
+          if (!isColl) {
+            doc.push(Math.random());
+          }
+          
+          //console.log(doc);
+
           if (doc[1]) {
             var matchfocus = doc[1].matchfocus || [];
             var mfstr = ' data-mf="' + Util.paramArray(matchfocus) + '"';
