@@ -2765,20 +2765,39 @@ var AnnotatorUI = (function($, window, undefined) {
 
 
       $("#submitLabel").click(function(){
-          var _label1 = $('#label1').prop('checked');
-          var _label2 = $('#label2').prop('checked');
-          var _label3 = $('#label3').prop('checked');
-          dispatcher.post('ajax', [{
-            action: 'submit',
-            label1: _label1,
-            label2: _label2,
-            label3: _label3,
-            collection: coll,
-            'document': doc
-          },
-          function(response) {
-              console.log("label revised!")
-          }]);
+          // var _label1 = $('#label1').prop('checked');
+          // var _label2 = $('#label2').prop('checked');
+          // var _label3 = $('#label3').prop('checked');
+
+          var label_dic = "";
+          $.getJSON( "label.json", function( data ) {
+
+            var label_total_num = data["num"];
+
+            for(var i = 0; i < label_total_num; i++){
+              var _label = $('#label' + i + 1).prop('checked');
+
+              if (_label == true){
+                label_dic += "T";
+              }
+              else{
+                label_dic += "F";
+              }
+            }
+
+            dispatcher.post('ajax', [{
+              action: 'submit',
+              label_array: label_dic,
+              collection: coll,
+              'document': doc
+            },
+            function(response) {
+                console.log("label revised!")
+            }]);
+
+
+          })
+          
           // var retrianaction = {
           //   action: 'submitlabel',
           //   collection: coll,

@@ -34,6 +34,7 @@ var Dispatcher = (function($, window, undefined) {
       };
 
       var post = function post(asynch, message, args, returnType) {
+
         if (typeof(asynch) !== 'number') {
           // no asynch parameter
           returnType = args;
