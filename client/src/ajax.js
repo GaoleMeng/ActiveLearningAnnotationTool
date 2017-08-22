@@ -92,6 +92,7 @@ var Ajax = (function($, window, undefined) {
                   console.log(problist)
                   renderdiv = $("#render")
                   renderdiv.empty();
+                  var count = 0;
                   for (var i = 0; i < data["num"]; i++){
                       var childdiv = document.createElement("div");
                       var checkbox = document.createElement("input")
@@ -118,11 +119,14 @@ var Ajax = (function($, window, undefined) {
                       childdiv.append(griddiv);
 
 
+
                       second_span.textContent = data[i];
                       third_span.textContent = problist[data[i]];
 
                       checkbox.type = "checkbox";
-                      var hh = i+1;
+                      // var hh = count+1;
+                      // count = count+1;
+                      var hh = i + 1;
                       checkbox.id = "label" + hh;
                       checkbox.style.float = "left";
                       checkbox.value = "off";
@@ -132,7 +136,7 @@ var Ajax = (function($, window, undefined) {
                       childdiv.style.margin="3px"
 
                       $("#render").append(childdiv);
-                      
+                    
                   }
               });
 

@@ -36,6 +36,8 @@ from predict import suggest_span_types
 from undo import undo
 from tag import tag
 
+import tensorflow as tf;
+
 from submitlabel import label
 from retrainmodel import dumpy
 
@@ -229,6 +231,12 @@ def _directory_is_safe(dir_path):
             ).startswith(normpath(DATA_DIR))
 
 def dispatch(http_args, client_ip, client_hostname):
+
+
+    # initialize = tf.global_variables_initializer()
+    # with tf.Session() as sess:
+    #     sess.run(initialize)
+
     action = http_args['action']
 
     log_info('dispatcher handling action: %s' % (action, ));

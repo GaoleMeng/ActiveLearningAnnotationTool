@@ -2775,7 +2775,8 @@ var AnnotatorUI = (function($, window, undefined) {
             var label_total_num = data["num"];
 
             for(var i = 0; i < label_total_num; i++){
-              var _label = $('#label' + i + 1).prop('checked');
+              var tmp = i+1;
+              var _label = $('#label' + tmp).prop('checked');
 
               if (_label == true){
                 label_dic += "T";

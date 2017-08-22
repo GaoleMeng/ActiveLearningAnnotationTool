@@ -7,12 +7,13 @@ import os.path
 import json
 
 from datetime import datetime
+import tensorflow as tf
 
 def label(label_array, collection, document):
 	file_path = u'./data' +collection + document
 	file_path += u'.lbl'
 
-	f = open(file_path, 'a')
+	f = open(file_path, 'w')
 
 
 	with open("label.json") as json_file:
@@ -23,7 +24,7 @@ def label(label_array, collection, document):
 				f.write(str(json_data[str(i)]) + ":1" + " ")
 			else:
 				f.write(str(json_data[str(i)]) + ":0" + " ")
-		f.write("\t" + str(datetime.now()) + "\n");
+		# f.write("\t" + str(datetime.now()) + "\n");
 
 	f.close();
 

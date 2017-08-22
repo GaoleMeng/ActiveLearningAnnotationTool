@@ -29,7 +29,6 @@ from projectconfig import ProjectConfiguration
 QUERY_TIMEOUT = 30
 ###
 
-
 class UnknownTaggerError(ProtocolError):
     def __init__(self, tagger):
         self.tagger = tagger

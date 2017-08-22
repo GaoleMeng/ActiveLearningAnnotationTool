@@ -19,6 +19,8 @@ from SimpleHTTPServer import SimpleHTTPRequestHandler
 from SocketServer import ForkingMixIn
 import socket
 
+import tensorflow as tf;
+
 # brat imports
 sys.path.append(os.path.join(os.path.dirname(__file__), 'server/src'))
 from server import serve
@@ -60,7 +62,7 @@ import verify_annotations
 
 _VERBOSE_HANDLER = False
 _DEFAULT_SERVER_ADDR = ''
-_DEFAULT_SERVER_PORT = 8007
+_DEFAULT_SERVER_PORT = 8018
 
 _PERMISSIONS = """
 Allow: /ajax.cgi

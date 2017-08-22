@@ -536,7 +536,7 @@ class InteractiveLearner(object):
 				total_cost += cost
 				# print 'batch', i, i*self.batch_size, cost
 				i += 1
-			sys.stderr.write('epoch,' + str(t) + ',total_cost,' + str(total_cost))
+			sys.stderr.write('epoch,' + str(t) + ',total_cost,' + str(total_cost) + "\n")
 			# print 'epoch', t, 'total_cost', total_cost
 			if t % self.validation_interval == 0 and validation_set != None:
 				self._refresh_model_params()
@@ -548,7 +548,7 @@ class InteractiveLearner(object):
 				if val_perf_drop_counter >= STOP_AFTER_VAL_PERF_DROP_COUNT:
 					break
 
-		print 'epoch', t, 'total_cost', total_cost
+		sys.stderr.write('epoch,' + str(t) + ',total_cost,' + str(total_cost) + "\n")
 
 		# =========================================================================
 		if validation_set != None:
@@ -926,6 +926,7 @@ class InteractiveLearnerNaiveBayes(InteractiveLearner):
 
 		session = tf.Session()
 		):
+        
 
 		self.is_sparse = True
 		self.max_vocab = max_vocab
@@ -938,6 +939,7 @@ class InteractiveLearnerNaiveBayes(InteractiveLearner):
 		if len(inst_labels) == 0 and len(feat_labels) == 0:
 			sys.stderr.write('InteractiveLearnerNaiveBayes::fit(): neither instance label nor feature label is provided. Nothing to fit.\n')
 			return self
+
 		sys.stderr.write('InteractiveLearnerNaiveBayes::fit() ...\n')
 		# =========================================================================
 		# extract input data
@@ -946,6 +948,7 @@ class InteractiveLearnerNaiveBayes(InteractiveLearner):
 		self.label_idx = get_label_idx(inst_labels, feat_labels)
 		i_target = get_i_target(self.inst_idx, self.label_idx, inst_labels)
 		f_target = get_f_target(self.feat_idx, self.label_idx, feat_labels)
+
 
 		# =========================================================================
 		# estimate nb model (TODO: add a bias term)

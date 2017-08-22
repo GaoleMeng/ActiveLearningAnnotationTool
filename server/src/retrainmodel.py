@@ -9,6 +9,8 @@ from os import listdir
 
 from learn.main import run
 
+from subprocess import call
+
 import sys
 
 import tensorflow as tf;
@@ -28,7 +30,9 @@ def dumpy(collection, document):
 		os.makedirs(outputpath)
 
 	Messager.info("Traing start:");
-	run(file_path, outputpath)
+	# run(file_path, outputpath)
+	call(['python', 'server/src/learn/main.py', file_path, outputpath], stdout=sys.stderr, stderr=sys.stderr)
+
 	Messager.info("Back-end model training finished");
 
 	outputlbl = outputpath + "/" + document + ".lbl";

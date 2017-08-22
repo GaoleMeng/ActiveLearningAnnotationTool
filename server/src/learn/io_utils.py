@@ -43,6 +43,7 @@ def read_instance_labels(input_dir):
 
 			d = {}
 			for ss in line.strip().split():
+				sys.stderr.write(str(ss));
 				k, v = ss.split(':')
 				d[k] = float(v)
 			inst_labels[inst_name] = d
@@ -69,10 +70,11 @@ def read_all_known_labels(input_dir):
 			fpath = os.path.join(input_dir, fn)
 			f = open(fpath)
 			for line in f:
-				ann_id, span_info, feat_str = line.strip().split('\t')
-				l, start, end = span_info.split()
-				if l not in labels:
-					labels[l] = 1
+				if (line[0] != 'S'):
+					ann_id, span_info, feat_str = line.strip().split('\t')
+					l, start, end = span_info.split()
+					if l not in labels:
+						labels[l] = 1
 			f.close()
 	return labels
 
