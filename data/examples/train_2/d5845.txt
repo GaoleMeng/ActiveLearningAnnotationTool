@@ -1,0 +1,1 @@
+hallo ebosco us oracl com wrote on 28 04 93 about emm386 and window e von ebosco us oracl com mi 28 04 93 18 03 e name eric bosco e should i us emm386 or should i remov it from my config sy basic window prefer extendend memori instead of expand more work to do for win and if no applic desperatli need em you should leav emm386 with a rem in your config sy bye chri

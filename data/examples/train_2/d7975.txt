@@ -1,0 +1,1 @@
+note that if you get the extern cd300 for your centri or q800 you will miss out on the sound mix featur unless you ar will to run a wire from the motherboard sound input connector to the stereo output on the cd connect to the sound input port on the back of the comput won t do unless you can live with mono

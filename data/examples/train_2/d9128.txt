@@ -1,0 +1,1 @@
+befor i try to teach myself how to write a widget and perhap re invent the wheel is there a pd widget that displai for exampl an 8 bit grei level imag in the same fashion that the athena plotter widget can be us to displai a plot robert m cothren phd rim bme ri ccf org depart of biomed engin the cleveland clinic foundat voic 216 445 9305 cleveland ohio fax 216 444 9198

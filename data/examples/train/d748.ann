@@ -1,0 +1,14 @@
+S1	c1:0.008 218 223	radar
+S2	c1:0.008 1555 1560	radar
+S3	c1:0.008 899 904	radar
+S4	c1:0.009 1003 1011	detector
+S5	c1:0.008 364 369	radar
+S6	c1:0.009 508 516	detector
+S7	c1:0.008 2065 2070	radar
+S8	c1:0.009 1258 1266	detector
+S9	c1:0.009 1631 1639	detector
+S10	c1:0.008 778 783	radar
+S11	c1:0.009 2027 2035	detector
+S12	c1:0.009 1561 1569	detector
+S13	c1:0.009 1204 1212	detector
+S14	c1:0.085 1076 1079	car

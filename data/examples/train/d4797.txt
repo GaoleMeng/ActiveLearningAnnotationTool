@@ -1,0 +1,1 @@
+pe hutc cs hut fi pekka siltanen write suppos two cubic bezier curv control point v1 v4 and w1 w4 which have equal first and last control point v1 w1 v4 w4 how do i get upper bound for distanc between these curv which distanc the distanc between on point t ti on the first curv and a point on the other curv with same paramet u ti ani refer appreci thank in anvanc pekka siltanen

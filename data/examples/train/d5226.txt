@@ -1,0 +1,1 @@
+in articl 5713 seti inria fr deniaud cartoon inria fr gill deniaud write hi i m look for a program which is abl to displai 24 bit imag we ar us a sun sparc equip with parallax graphic board run x11 xli xloadimag or imagemagick export lc mit edu 18 24 0 12 contrib graem gill

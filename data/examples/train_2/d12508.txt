@@ -1,0 +1,1 @@
+greet i m a novic in thi area i m try to gather info on standard phone line set quick question if i just want to send out a beep over the phone line can i do it with some function gener tie it up to on of those phone wire which on of those wire should i connect to my dtmf chip as audio in ani help would be much appreci thankx in advanc handi trisakti uc532838 mizzou1 missouri edu

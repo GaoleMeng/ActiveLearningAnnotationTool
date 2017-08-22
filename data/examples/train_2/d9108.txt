@@ -1,0 +1,1 @@
+mouseless oper is document in the man page for olwm and olvwm howev i can t get it to work in either i have thi line in my xdefault openwindow keyboardcommand full that should do it i haven t rebound the kei am i miss someth d

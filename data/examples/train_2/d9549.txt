@@ -1,0 +1,1 @@
+hi there i m try to build x11r5 mit core distribut on a sparcstat run suno 4 1 1 the onli thing i chang is the projectroot in site def when the make world process goe to cc o xdm i get the follow error ld undefin symbol __c0095a2a error code 2 and the process continu to finish doe anybodi know what s wrong thanx for ani info lei shao ls116 cunixa cc columbia edu

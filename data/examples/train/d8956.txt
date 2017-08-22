@@ -1,0 +1,1 @@
+do anyon know about ani shade program base on xlib in the public domain i need an exampl about how to alloc correct colormap for the program appreci the help howard

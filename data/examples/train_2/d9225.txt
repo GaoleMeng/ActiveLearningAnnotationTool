@@ -1,0 +1,1 @@
+when i chang from svr4 to svr4 2 on my intel box i discov that some of my svr4 xclient such as xload etc would no longer work thei bomb out with the messag error can t open displai unix 0 0 is thi becaus thei can t find the correct share librari thei need to be recompil or have i not us the correct option both system us x11r5 thank jack

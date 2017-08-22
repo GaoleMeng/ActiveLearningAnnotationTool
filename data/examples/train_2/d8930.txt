@@ -1,0 +1,1 @@
+i wa have the same problem compil x11r5 on a ipc suno 4 1 3 if you compil with make k world it will not stop on the ld error as wa state in anoth post the client with the error still run correctli victor martinez vic fajita saic com

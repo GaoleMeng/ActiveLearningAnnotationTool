@@ -1,0 +1,1 @@
+i m have troubl with instal a second id drive on a promis id cach control the first drive is a conner 3204 and work fine the second drive is a conner 30174 it is current unjump to be the slave drive the problem is the slave drive is recogn but is report back as have no free space disabl cach ha made no effect what els should i check for krispi

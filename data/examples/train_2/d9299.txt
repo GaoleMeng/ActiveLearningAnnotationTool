@@ -1,0 +1,1 @@
+is there a version of wcl that ha been port to solari 2 includ ansi c i had numer problem try to compil wcl under solari and the function do not have prototyp i have wcl 2 01 from the sun user group s 1992 cd pleas email answer as i am not on thi list tom tulinski

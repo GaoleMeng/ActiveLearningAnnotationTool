@@ -1,0 +1,6 @@
+S1	c13:0.005 203 208	oscil
+S2	c13:0.013 179 184	power
+S3	c13:0.005 223 232	transform
+S4	c13:0.007 246 250	volt
+S5	c13:0.009 192 199	batteri
+S6	c13:0.019 251 259	electron

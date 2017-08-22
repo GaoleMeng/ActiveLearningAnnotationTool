@@ -1,0 +1,1 @@
+hi there with a 16meg of ram is there a need to run load smartdrv for window 3 1 if ye can i run load ramdriv without smartdrv if i need both ramdriv smartdrv is the follow config sy set ok smartdrv sy 2048 2048 ramdriv sy 2048 e thank in advanc for e mail repli yuan wiliki eng hawaii edu

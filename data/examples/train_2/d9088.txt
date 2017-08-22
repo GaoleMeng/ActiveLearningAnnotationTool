@@ -1,0 +1,1 @@
+as distribut twm think everyth with three or more colormap cell must be a colour screen here s a patch to have it us the screen s visual class twm c dist

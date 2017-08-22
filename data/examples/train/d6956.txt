@@ -1,0 +1,1 @@
+in 1993apr16 105809 22218 walter crai com huot crai com tom huot write i would also like an explan of thi if anyon can explain why the sb pro and lpt 1 can share an irq pleas do so i think it s simpli becaus do doesn t us the irq for anyth os 2 doe so with that you can t share the irq anssi anssi saari s106275 ee tut fi tamper univers of technolog finland europ

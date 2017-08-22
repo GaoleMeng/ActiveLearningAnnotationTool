@@ -198,7 +198,10 @@ def get_g_doc_seq(main_m, feat_idx, feat_tasks):
 	num_task = len(feat_tasks)
 	m = np.zeros( (num_task, num_inst, seq_len), dtype=np.int32 )
 	task_idx = 0
+	count = 0;
 	for f in feat_tasks:
+		count+=1;
+		sys.stderr.write(str(count) + "out of "+ str(len(feat_tasks)));
 		if f in feat_idx:
 			token_id = feat_idx[f]
 			for i in range(num_inst):
@@ -423,24 +426,6 @@ class InteractiveLearner(object):
 		# print 'doc', doc.dict, doc.shape
 		#print 'doc', doc[1], doc.shape
 
-		# self.seq_length = [];
-		# for i in range(len(doc)):
-		# 	toggle = 0;
-		# 	length = 0
-		# 	for j in range(len(doc[0])):
-		# 		if doc[i][j] == 0 and toggle == 0:
-		# 			toggle = 1;
-		# 		elif doc[i][j] != 0 and toggle == 1:
-		# 			toggle = 0;
-		# 		elif doc[i][j] == 0 and toggle == 1:
-		# 			length = j;
-		# 			break;
-		# 		elif j==499:
-		# 			length = 499;
-		# 			break;
-		# 	print length
-		# 	self.seq_length.append(length);
-
 		self.label_idx = get_label_idx(inst_labels, feat_labels)
 		# print 'self.label_idx', self.label_idx
 
@@ -463,6 +448,7 @@ class InteractiveLearner(object):
 			# print 'g_doc', g_doc.dict, g_doc.shape
 			pass
 		else:
+
 			g_doc = get_g_doc_seq(doc, self.feat_idx, feat_tasks)
 			g_target = get_g_target_seq(doc, self.feat_idx, feat_tasks)
 			# print 'g_doc', g_doc, g_doc.shape
@@ -517,9 +503,11 @@ class InteractiveLearner(object):
 					g_logits = self._dense_arch(self.W_emb, self.W_g, self.ph_g_doc, reduce_dim=2) # [g x N x l x k] => [g x N x k]
 					objective += tf.reduce_sum(tf.nn.sigmoid_cross_entropy_with_logits(labels=self.ph_g_target, logits=g_logits))
 
+
 		loss_op = objective
 		# =========================================================================
 		# gradient pipeline
+
 		self._opt = tf.train.AdamOptimizer(learning_rate=self.learning_rate) # seems to be better than Adam
 		# self._opt = tf.train.RMSPropOptimizer(learning_rate=self.learning_rate) # seems to be better than Adam
 		grads_and_vars = self._opt.compute_gradients(loss_op)
@@ -548,7 +536,8 @@ class InteractiveLearner(object):
 				total_cost += cost
 				# print 'batch', i, i*self.batch_size, cost
 				i += 1
-			print 'epoch', t, 'total_cost', total_cost
+			sys.stderr.write('epoch,' + str(t) + ',total_cost,' + str(total_cost))
+			# print 'epoch', t, 'total_cost', total_cost
 			if t % self.validation_interval == 0 and validation_set != None:
 				self._refresh_model_params()
 				val_max_perf, is_lower = self._eval_validation_set(val_documents, val_labels, val_max_perf, model_dir)

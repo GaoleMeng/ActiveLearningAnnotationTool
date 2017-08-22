@@ -1,0 +1,1 @@
+i m us bc s objectwindow 3 1 try to resond to the left button doubl click messag wm_lbuttondblclk in a combo box my code look like class mycombobox public tcombobox public mycombobox ptwindowsobject apar int resourceid word atextlen tcombobox apar resourceid atextlen virtual void wmlbuttondblclk rtmessag msg wm_first wm_lbuttondblclk void mycombobox wmlbuttondblclk rtmessag msg

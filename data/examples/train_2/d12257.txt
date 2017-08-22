@@ -1,0 +1,1 @@
+i would like to hook up some camera that were recent donat to our local commun cabl tv station which have sync input in the form of horizont and vertic drive our station sync is a black burst which work fine with other box with genlock style input can anyon point me at a design articl or whatev show how to produc the horizont vertic drive signal thank in advanc jack power

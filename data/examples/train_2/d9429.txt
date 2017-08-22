@@ -1,0 +1,1 @@
+in articl 1993apr30 120234 15637 cci dk hwn cci dk henrik w nielsen write i m try to make a 24 bit window us xcreatewindow on a 8 bit pseudocolor server as far as i know thi should be possibl if you stuff delet xio gswin xcreatewindow xio dspptr rootwindow xio dspptr xio scr

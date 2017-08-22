@@ -1,0 +1,1 @@
+ha anybodi gotten cview to work in 32k or 64k color mode on a trident 8900c hi color card at best the color come out screw up and at worst the program hang i load the vesa driver and the same thing happen on 2 differ machin if it doesn t work on the trident doe anybodi know of a viewer that doe thanx lisa

@@ -1,0 +1,13 @@
+S1	c6:0.038 483 490	program
+S2	c6:0.013 56 59	vga
+S3	c6:0.038 15 22	program
+S4	c6:0.016 63 68	color
+S5	c6:0.008 101 105	tiff
+S6	c6:0.052 250 254	file
+S7	c6:0.016 186 191	color
+S8	c6:0.028 44 48	imag
+S9	c6:0.028 132 136	imag
+S10	c6:0.052 106 110	file
+S11	c6:0.028 91 95	imag
+S12	c6:0.028 235 239	imag
+S13	c6:0.038 536 543	program

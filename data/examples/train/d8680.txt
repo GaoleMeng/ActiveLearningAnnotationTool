@@ -1,0 +1,1 @@
+hei gui i run twm and would like to execut some program befor leav twm in other word i would like to run some program befor i do f quit is it possibl to make a menu section which would contain these two part thank in advanc serg serg gluttoni astro unc edu

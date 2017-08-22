@@ -1,0 +1,1 @@
+greet my question is whether the upcom releas of x11r6 will provid strong authent between the x client and server s if so will thi featur be base on the kerbero authent mechan and if so will kerbero version 5 be us pleas repli via email thank andr andr s cosma rrc 1n 215 bellcor secur and andr bae bellcor com 444 hoe lane data servic 908 699 8441 piscatawai nj 08854

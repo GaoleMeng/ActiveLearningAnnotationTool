@@ -1,0 +1,1 @@
+the duo powerbook seem to park the head after a few second of inact is that builtin into the drive logic or is it be program via softwar ani wai to tune the iddl timeout that make the head park themselv i think the head ar be park sinc after a few second of inact you can hear the clunk of head park deni

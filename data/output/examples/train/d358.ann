@@ -1,0 +1,14 @@
+S1	c1:0.018 377 382	speed
+S2	c1:0.009 306 314	detector
+S3	c1:0.008 944 949	radar
+S4	c1:0.008 203 208	radar
+S5	c1:0.009 139 147	detector
+S6	c1:0.017 166 169	bui
+S7	c1:0.008 0 5	radar
+S8	c1:0.009 54 59	insur
+S9	c1:0.017 69 72	bui
+S10	c1:0.008 75 80	radar
+S11	c1:0.009 668 673	insur
+S12	c1:0.008 531 535	valv
+S13	c1:0.008 133 138	radar
+S14	c1:0.009 209 217	detector

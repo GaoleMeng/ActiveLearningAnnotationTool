@@ -1,0 +1,1 @@
+for imag displai about 10 frame per second seem to be the lower limit for interact oper for just bring up an imag for view less than 1 second seem to be a good number of cours the measur of respons time should be base on the applic you ar plan to run

@@ -1,0 +1,10 @@
+S1	c1:0.008 595 600	radar
+S2	c1:0.008 6 11	radar
+S3	c1:0.017 138 144	dealer
+S4	c1:0.010 361 366	owner
+S5	c1:0.010 98 103	owner
+S6	c1:0.010 193 198	owner
+S7	c1:0.018 48 53	speed
+S8	c1:0.010 108 113	owner
+S9	c1:0.085 319 322	car
+S10	c1:0.010 264 269	owner

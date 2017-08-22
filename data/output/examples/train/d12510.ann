@@ -1,0 +1,13 @@
+S1	c13:0.005 780 789	transform
+S2	c13:0.010 661 666	input
+S3	c13:0.004 756 760	line
+S4	c13:0.009 644 648	wire
+S5	c13:0.008 591 596	audio
+S6	c13:0.005 564 573	transform
+S7	c13:0.005 918 924	linear
+S8	c13:0.005 486 490	band
+S9	c13:0.010 112 117	input
+S10	c13:0.005 76 80	band
+S11	c13:0.005 515 524	transform
+S12	c13:0.005 209 218	transform
+S13	c13:0.004 174 178	line

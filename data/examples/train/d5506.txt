@@ -1,0 +1,1 @@
+thi seem to be a simpl problem but i just cannot solv it i wrote a c program to draw some polygon on the screen and i want to print it on my printer so i press print screen on the keyboard the problem is the printer just print out some ascii charact is there ani other wai to print the screen without us print screen pleas help

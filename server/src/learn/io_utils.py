@@ -81,14 +81,15 @@ def read_feature_labels(input_dir):
 	feat_labels = {}
 	for fn in os.listdir(input_dir):
 		if fn.endswith('.{}'.format(EXPLAIN_FILE_SUFFIX)): # annotation file
-			inst_name = fn[:-4]
+			inst_name = fn[:-4];
 
 			fpath = os.path.join(input_dir, fn)
 			f = open(fpath)
 			for line in f:
-				ann_id, span_info, feat_str = line.strip().split('\t')
-				label, start, end = span_info.split()
-				feat_labels[feat_str] = make_smooth_label_dist(all_known_labels, label)
+				if (line[0] != 'S'):
+					ann_id, span_info, feat_str = line.strip().split('\t')
+					label, start, end = span_info.split()
+					feat_labels[feat_str] = make_smooth_label_dist(all_known_labels, label)
 			f.close()
 
 	return feat_labels

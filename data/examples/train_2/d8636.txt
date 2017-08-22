@@ -1,0 +1,1 @@
+i just put a 33mhz 040 cpu into my centri 610 now i have a math coprocessor but is it possibl to speed up the centri to run at either 25mhz or 33mhz i didn t see ani oscil on the motherboard like the on on the iisi s motherboard where is the oscil for the centri ani idea thank saiid paryavi

@@ -1,0 +1,8 @@
+S1	c8:0.013 75 81	memori
+S2	c8:0.025 7 11	scsi
+S3	c8:0.015 46 51	devic
+S4	c8:0.025 91 95	scsi
+S5	c8:0.015 96 101	devic
+S6	c8:0.042 12 16	card
+S7	c8:0.029 52 58	driver
+S8	c8:0.042 151 156	thank

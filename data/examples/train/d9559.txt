@@ -1,0 +1,1 @@
+hei folk on the cours to develop a x window applic we encount a problem how could i transform a x window bitmap into a postscript file is there ani librari routin or sourc code i can call to do the job thank you in advanc p s email repli pleas i seldom read thi newsgroup

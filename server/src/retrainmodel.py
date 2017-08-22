@@ -9,17 +9,28 @@ from os import listdir
 
 from learn.main import run
 
+import sys
+
+import tensorflow as tf;
+
 def dumpy(collection, document):
 
 	file_path = u'./data' + collection
-	outputpath = u'./data' + collection + "output"
+	outputpath = u'./data/output' + collection
+
 	# f = open(file_path)
 	# Messager.error("hdhhd")
 	# Messager.error(file_path)
 	# for i, line in enumerate(f):
 	# 	Messager.error(line)
 	# f.close()
+	if not os.path.exists(outputpath):
+		os.makedirs(outputpath)
+
+	Messager.info("Traing start:");
 	run(file_path, outputpath)
+	Messager.info("Back-end model training finished");
+
 	outputlbl = outputpath + "/" + document + ".lbl";
 	outputann = outputpath + "/" + document + ".ann";
 
@@ -44,7 +55,7 @@ def dumpy(collection, document):
 	# 		original_f.write(line)
 
 	# original_f.close();
-	#Messager.info("back-end model trained")
+	Messager.info("back-end model trained")
 	return {}
 
 	

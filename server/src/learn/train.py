@@ -41,8 +41,6 @@ else:
 	valid_set = None
 
 
-
-
 if 'sparse' in param_str:
 	# learner = InteractiveLearnerNaiveBayes(max_vocab = 10000, feat_label_pseudo_count = 10.)
 	learner = InteractiveLearner(is_sparse = True, max_vocab = 10000, num_epoch = 10, batch_size = 128, learning_rate=3e-2)

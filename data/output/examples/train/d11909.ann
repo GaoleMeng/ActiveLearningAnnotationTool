@@ -1,0 +1,12 @@
+S1	c13:0.010 863 868	input
+S2	c13:0.005 465 469	puls
+S3	c13:0.005 1087 1093	linear
+S4	c13:0.006 629 633	nois
+S5	c13:0.019 1023 1031	electron
+S6	c13:0.010 869 877	frequenc
+S7	c13:0.006 622 628	electr
+S8	c13:0.021 698 705	circuit
+S9	c13:0.019 71 79	electron
+S10	c13:0.005 95 100	oscil
+S11	c13:0.019 560 568	electron
+S12	c13:0.019 253 261	electron

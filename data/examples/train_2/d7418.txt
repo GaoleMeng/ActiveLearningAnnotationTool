@@ -1,0 +1,1 @@
+what s the differ between a 16550 uart and a 16550a uart thank bug 16550 without the a would sometim get extra charact in the fifo thi render the fifo useless onli get the 16550a

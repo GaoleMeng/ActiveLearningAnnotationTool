@@ -1,0 +1,1 @@
+i am look for a suitabl uart for a project what i requir is a stand alon devic i e not cpu control which will receiv 1200 baud rs232 also a nice extra would be a receiv data buffer pleas repli with ani info you have thank chad d hubich

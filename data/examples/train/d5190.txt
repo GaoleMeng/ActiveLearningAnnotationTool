@@ -1,0 +1,1 @@
+hi i am look for an algorithm or pointer to ani paper on how to convert quadrat spline to cubic spline or beizeir if sourc is avail in the public domain pleas let me know thank veri much ks krishnan seetharaman e mail kseethar cs ulowel edu

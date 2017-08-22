@@ -1,0 +1,1 @@
+mani all xt drive control have their own bio on board to handl low level format the bio also allow you to set up the drive properli of cylind head etc andi robinson cs psu edu

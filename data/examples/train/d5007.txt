@@ -1,0 +1,1 @@
+the idea is to clip on polygon us anoth polygon not necessarili rectangular as a window my problem then is in find out all the new vertic of the result subpolygon from the first on is thi simpli a matter of extend the usual algorithm wherebi each of the edg of on polygon is check against anoth polygon is there a simpler wai comment welcom noel

@@ -1,0 +1,1 @@
+i got a number of request for code so here it is it written in 80x86 asm borland tasm will do tasm lga asm tlink t lga asm the code lga ncryption c by nick nassuphi code

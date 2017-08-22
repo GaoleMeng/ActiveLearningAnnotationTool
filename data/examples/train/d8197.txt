@@ -1,0 +1,1 @@
+doubl speed perform from a cd drive doe not requir scsi 2 interfac the result 300 kbp speed is well within the transfer rate of an lc in other word i believ you have been given incorrect inform

@@ -1,0 +1,11 @@
+S1	c13:0.007 366 374	resistor
+S2	c13:0.010 181 186	input
+S3	c13:0.013 271 277	output
+S4	c13:0.004 120 124	line
+S5	c13:0.004 242 246	line
+S6	c13:0.005 92 99	channel
+S7	c13:0.007 262 266	volt
+S8	c13:0.010 125 130	input
+S9	c13:0.013 206 212	output
+S10	c13:0.013 159 165	output
+S11	c13:0.005 75 79	band

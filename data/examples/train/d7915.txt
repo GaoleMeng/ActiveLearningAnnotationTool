@@ -1,0 +1,1 @@
+i have an extern hard drive i wish to us as startup disk problem is when i switch on the mac it boot on the intern hd but when i restart warm boot the mac it boot from the extern how do i make it boot directli from the extern pleas email repli if possibl thank in advanc jerri

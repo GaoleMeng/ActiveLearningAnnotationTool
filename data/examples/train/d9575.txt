@@ -1,0 +1,1 @@
+ld unidentifi extern symbol _get_wmshellwidgetclass _get_applicationshellwidgetclass i us lxaw lxmu lxext lx11 lxt not in thi order but in a proper order i am wonder if there ha to be some chang in my link librari or should i includ some more librari ani help in thi matter will be veri us and highli appreci thank pramod

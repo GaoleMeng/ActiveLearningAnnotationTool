@@ -1,0 +1,1 @@
+i am in the process of modifi an x applic that us xlib i d like to includ a timer driven facil for network poll but cannot see how to do it us xlib i know it can be done with xaw us xtappaddtimeout and xttimercallbackproc how do i do the same us xlib thank for ani help pleas email dave wilson comput centr rhode univers grahamstown south africa

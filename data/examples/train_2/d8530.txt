@@ -1,0 +1,1 @@
+i have got a dot matrix printer that came with a lisa i think i wish to attach it to a pc but have no manual i have been told that it is some sort of c itoh printer in disguis can anyon help with manual or info about code to send to select font ital etc i want to write a printer driver for protext thank in advanc stuart stuart munn

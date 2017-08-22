@@ -1,0 +1,1 @@
+in articl jam 19 735404158 ameslab gov jam ameslab gov jerri musselman wrote i need to find a uart that will interfac to an 8051 and do the follow

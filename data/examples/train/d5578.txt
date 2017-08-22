@@ -1,0 +1,1 @@
+hi if you want to have soft scroll on your vga you have to chang some intern regist of the crtc but it is a littl bit difficult to explain so i would suggest you take a look at the program of the ega vga adapt by addison weslei you will find all us descript for everi avail vga regist bori dr_bobo ponton hans de bori pruessmann

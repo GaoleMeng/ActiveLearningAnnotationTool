@@ -1,0 +1,1 @@
+hello i want to know if a spoilt com port will creat problem with mous my mous just get stuck on the screen for a while and i have to press it button to be abl to move it around again is there a sharewar util program to diagnos my com port thank ming

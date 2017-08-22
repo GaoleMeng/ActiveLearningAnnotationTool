@@ -1,0 +1,1 @@
+my disk that had my joystick code that some of you were kind enough to mail me puke specif i am look for c code to read the posit of joystick without us int15h i e access port 0x200 0x201 directli i need it in c becau of memori model consider i onli need to be abl to read the x and y posit also brian

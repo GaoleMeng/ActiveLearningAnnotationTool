@@ -55,9 +55,9 @@ var Ajax = (function($, window, undefined) {
           
                   coll = response.collection;
                   doc = response.document;
-                  var newpath = "data/" + coll + "output/" + doc + ".lbl";
+                  var newpath = "data/output/" + coll + doc + ".lbl";
                   console.log(doc);
-                  var problist = [];
+                  var problist = {};
 
                   function readTextFile(file)
                           {
@@ -75,9 +75,11 @@ var Ajax = (function($, window, undefined) {
                                           // console.log($(".background > rect"));
                                           for (var i = 0; i < lines.length; i++){
                                               if (lines[i].length != 0){
-                                                  var vec = lines[i].split("\t");
-                                                  console.log(vec)
-                                                  problist.push(parseFloat(vec[1]));
+                                                  vec = lines[i].split(" ");
+                                                  for (var i = 0; i < vec.length; i++){
+                                                    thisinput = vec[i].split(":")
+                                                    problist[thisinput[0]] = thisinput[1];
+                                                  }
                                               }
                                           }
                                       }
@@ -87,6 +89,7 @@ var Ajax = (function($, window, undefined) {
                           }
                   readTextFile(newpath)
 
+                  console.log(problist)
                   renderdiv = $("#render")
                   renderdiv.empty();
                   for (var i = 0; i < data["num"]; i++){
@@ -116,7 +119,7 @@ var Ajax = (function($, window, undefined) {
 
 
                       second_span.textContent = data[i];
-                      third_span.textContent = problist[i];
+                      third_span.textContent = problist[data[i]];
 
                       checkbox.type = "checkbox";
                       var hh = i+1;

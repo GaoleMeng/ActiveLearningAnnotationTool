@@ -1,0 +1,1 @@
+thi mai be a fairli routin request on here but i m look for a fast polygon routin to be us in a 3d game i have on that work right now but it veri slow could anyon point me to on pref in asm that is fairli well document and flexibl thanx luca

@@ -1,0 +1,1 @@
+i got the univesa driver avail over the net i thought that final my 1 meg oak board would be abl to show 680x1024 256 color unfortun a program still sai that i can t do thi is it the fault of the program fractint or is there someth wrong with my card univesa a free driver avail over the net that make mani board vesa compat

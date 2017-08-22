@@ -1,0 +1,1 @@
+i ve recent move from unix to a do box and have a number of file that i us crypt to protect doe anyon know of a do version of crypt i ve found on but it insist on six letter kei and i us some shorter on thank for your help doug

@@ -1,0 +1,1 @@
+hi there i m look for tool that can make x program easi i would like to have a tool that will enabl to creat x motif gui interactivli current i m work on a sgi with form a packag that enabl to creat gui with no code at all but the callback ani help will be appreci thank gabi

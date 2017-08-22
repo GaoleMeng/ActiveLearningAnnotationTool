@@ -1,0 +1,1 @@
+could someon pleas help me find a program or figur out how to extract a li st of r g b valu for each pixel in an imag i can convert between tga and s ever other popular format but i need the r g b valu for us in a program i am write thank for the help

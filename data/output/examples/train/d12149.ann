@@ -1,0 +1,11 @@
+S1	c13:0.010 110 115	input
+S2	c13:0.013 243 249	output
+S3	c13:0.021 19 26	circuit
+S4	c13:0.005 438 443	bison
+S5	c13:0.021 332 339	circuit
+S6	c13:0.021 39 46	circuit
+S7	c13:0.013 214 220	output
+S8	c13:0.009 121 127	signal
+S9	c13:0.009 366 372	signal
+S10	c13:0.013 132 138	output
+S11	c13:0.004 430 437	inqmind

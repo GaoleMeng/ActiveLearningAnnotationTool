@@ -1,0 +1,1 @@
+how doe on print to a non appletalk printer us dmm laserwrit stuff i m us the serial driverand doe nothig i vetri save a postscriptfil and then tri send with sendp2 0 and it sai can topen laserwrit driver then some appletalk messagethatprint not specifi i m us and imagewritwrit on cabl should i us a null modem adapt help lowel lowel reiter

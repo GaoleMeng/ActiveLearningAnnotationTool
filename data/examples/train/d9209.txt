@@ -1,0 +1,1 @@
+can someon tell me in 25 word or less how to compil posix messag catalog so that i can us them with catget catopen etc i know what the format for the catalog is but don t know how to compil them pleas repli to cha blackwhit com thank in advanc cha black white softwar inc

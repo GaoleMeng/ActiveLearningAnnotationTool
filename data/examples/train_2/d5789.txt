@@ -1,0 +1,1 @@
+file 30 buffer 30 devic c window himem sy devic c window smartdrv ex doubl_buffer stack 9 256 and also my autoexec bat c vshield c window smartdrv ex l rem mousewar 5 0 setup path c c do c window c fax c mous c wp51 set temp c window temp mous ser 2 rem c do share have you seen thi problem befor pleas help me out thank hadi

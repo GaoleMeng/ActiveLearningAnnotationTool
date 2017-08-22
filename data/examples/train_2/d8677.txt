@@ -1,0 +1,1 @@
+excerpt from misc 27 apr 93 re x toolkit sivesh pradhaan rebel b 423 i do not have finger so is there ani other wai of access thi servic like mail server or telnet or ftp you can us telnet % xhost atk itc cmu edu % telnet atk itc cmu edu 79 run demo

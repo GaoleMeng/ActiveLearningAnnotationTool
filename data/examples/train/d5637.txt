@@ -1,0 +1,1 @@
+hi netter i am look for sourc code that can read the ascii file or bitmap file and produc the thin imag for exampl to preprocess the charact imag i want to appli thin algorithm thank kevin

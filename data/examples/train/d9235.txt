@@ -1,0 +1,1 @@
+is it possibl to run an mit r5 base xserver on a sun with a rasterop tc colorboard 24bit board i have the xsun24 patch for support sun s 24bit frame buffer but doe the rasterop appear as if it a cgtwelv or someth els i know noth about the rasterop other than we might be bui on to put in an ipx cheer mark

@@ -1,0 +1,17 @@
+S1	c12:0.066 270 277	encrypt
+S2	c12:0.050 167 174	clipper
+S3	c12:0.040 63 68	secur
+S4	c12:0.011 278 284	scheme
+S5	c12:0.050 45 52	clipper
+S6	c12:0.019 457 461	data
+S7	c12:0.050 505 512	clipper
+S8	c12:0.050 89 96	clipper
+S9	c12:0.066 444 451	encrypt
+S10	c12:0.028 357 360	nsa
+S11	c12:0.020 795 802	wiretap
+S12	c12:0.011 723 729	scheme
+S13	c12:0.066 568 575	encrypt
+S14	c12:0.011 478 484	scheme
+S15	c12:0.020 636 643	wiretap
+S16	c12:0.066 175 182	encrypt
+S17	c12:0.020 589 596	wiretap

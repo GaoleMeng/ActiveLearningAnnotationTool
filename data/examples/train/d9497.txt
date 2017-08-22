@@ -1,0 +1,1 @@
+yesterdai i chang the us keyboard of my sparc10 with a german keyboard and now i cannot get ani alt graph charact tild usw when i exit from x i can get the charact but not under x can anybodi give me some hint where to check for the correct instal of the keyboard martin kreutzer

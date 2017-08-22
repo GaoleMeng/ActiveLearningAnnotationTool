@@ -1,0 +1,1 @@
+i need some help in track down a dvi viewer for x i have xdvi but we have not got the x librari and includ instal so i is there a wai around thi as we ar try to avoid instal the stuff space is at a premium ii would someon be prepar to make the binari avail we have a hp700 and a hp382 thank for ani help michael carlei dept of mech engin tcd

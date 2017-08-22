@@ -1,0 +1,1 @@
+i need to get an appl 40sc tape backup unit work under sy 7 0 x but do not have ani driver softwar to access the devic doe anyon know where i can fidn the tool to access thi devic appreci ani info comment curti curti c gener

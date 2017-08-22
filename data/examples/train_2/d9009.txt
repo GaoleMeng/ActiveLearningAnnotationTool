@@ -1,0 +1,1 @@
+i need to write an applic which doe annot note on exist document the annot could be done sever time by differ peopl the idea is someth like have sever acet transpar stack on top of each other so that the user can see through all of them i ve seen someth like thi be done by the oclock client could someon pleas tell me how to do it in xt thank you veri much

@@ -1,0 +1,17 @@
+S1	c13:0.005 371 377	linear
+S2	c13:0.005 362 370	motorola
+S3	c13:0.005 522 527	oscil
+S4	c13:0.005 171 173	fm
+S5	c13:0.005 342 351	transmitt
+S6	c13:0.010 138 146	frequenc
+S7	c13:0.010 680 688	frequenc
+S8	c13:0.005 489 491	fm
+S9	c13:0.021 454 461	circuit
+S10	c13:0.005 174 183	transmitt
+S11	c13:0.005 611 616	oscil
+S12	c13:0.005 94 96	fm
+S13	c13:0.005 416 421	oscil
+S14	c13:0.005 339 341	fm
+S15	c13:0.021 232 239	circuit
+S16	c13:0.010 528 536	frequenc
+S17	c13:0.005 97 106	transmitt

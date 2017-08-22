@@ -1,0 +1,10 @@
+S1	c1:0.006 581 587	cylind
+S2	c1:0.011 541 550	transmiss
+S3	c1:0.009 307 312	motor
+S4	c1:0.015 170 174	ford
+S5	c1:0.015 276 280	ford
+S6	c1:0.005 363 370	exhaust
+S7	c1:0.005 527 532	torqu
+S8	c1:0.010 625 630	owner
+S9	c1:0.009 380 385	motor
+S10	c1:0.006 224 229	wagon

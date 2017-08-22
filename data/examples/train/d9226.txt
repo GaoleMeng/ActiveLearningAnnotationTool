@@ -1,0 +1,1 @@
+in 1993apr17 170907 25718 samba oit unc edu naoumov physic unc edu sergei naoumov write hei gui i work on mani station and would like thi name and current lognam to be in a titl of xterm when it s open and a machin name onli when it s close in other word i want $host and $lognam to appear as a titl of open xterm and $host when xterm is close how can i do it thnsk in advanc

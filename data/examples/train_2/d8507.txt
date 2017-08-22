@@ -1,0 +1,1 @@
+i had ask everyon about problem instal a 4 meg simm and an 8 meg simm in my centri 610 but the folk at the local appl store call the folk in cupertino and found that you can t have simm of differ speed in on machin even if thei ar both fast enough ie my 80 ns 8 meg and 60ns 4 meg simm were incompatib just thought peopl might want to know jason

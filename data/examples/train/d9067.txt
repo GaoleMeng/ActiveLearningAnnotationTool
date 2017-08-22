@@ -1,0 +1,1 @@
+i have a problem when i m us postscript when i am work local on a sun sparcstaton ipc the postscript work good but when i connect to the sun from a x termin i just get error messag that the postscript cannot connect to the new displai why doesn t postscript work on an x termin is there ani wai to make it work henrik henrik hjort hjort

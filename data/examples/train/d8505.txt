@@ -1,0 +1,1 @@
+i have an extern drive connect to my iisi thi is never recogn and mount on system startup i can mount it with the scsi control panel i m run system 7 0 1 and everyth is properli termin would anyon have a help idea at to the problem dougla s rand drand osf org

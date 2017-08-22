@@ -1,0 +1,1 @@
+anyon know how an applic can retriev the name of the font from an applic given an xfontstruct would xgetfontproperti work if i pass xa_font_name anyon know detail of thi thank in advanc brian brian deali 301 572 8267 it not know where it s at deali kong gsfc nasa gov that s import it s know uunet dftsrv kong deali where it s not at b dylan

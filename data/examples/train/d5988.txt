@@ -1,0 +1,1 @@
+i am interest to know if there is know procedur document to configur an ibm musci featur imf card to work as the sound devic with ms window 3 1 i believ the imf us the same fm synth chip as the soun blaster but didn t know what driver to us or how to configur the midi mapper ani help past success suggest thank don

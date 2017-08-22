@@ -1,0 +1,1 @@
+i final got the vesa driver for my ati graphic ultra plu 2m howev when i tri to us thi to view under 24bit mode i get line on the pictur with 16bit or below the pictur is fine can someon tell me what wa wrong is it the card or is it the softwar thank 8 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _

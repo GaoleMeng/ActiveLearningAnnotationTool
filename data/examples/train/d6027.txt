@@ -1,0 +1,1 @@
+i am work with 24 bit rgb bmp file and need to comvert these to 15 and 16 bit imag how do convert 24 bit imag to 15 and 16 bit rgb imag thank

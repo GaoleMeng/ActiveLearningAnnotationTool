@@ -1,0 +1,1 @@
+i have a stereo compressor limit by audio logic model mt 66 the gate work but the compressor seem to be gone on on channel and veri weak on the other i ll probabl need an ocsilloscop to trace it down no pun intend but if ani on with experi with thi type of equip could point me in a certain direct as to where the circuit is most like to fail i d sure appreci it robert c stephen

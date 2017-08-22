@@ -1,0 +1,1 @@
+in articl 93091 144124dep slacvm slac stanford edu dep slacvm slac stanford edu write is there a wai to identifi an x protocol packet under decnet under tcp ip the inform in the packet isn t necessarili distinct you need to know that it is an x11 connect ethan

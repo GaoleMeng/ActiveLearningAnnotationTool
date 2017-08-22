@@ -1,0 +1,1 @@
+i post thi question about color motif widget i got it work fine there wa on bug in my xdefault file it should work fine in normal case thank samir spatel cs tamu edu

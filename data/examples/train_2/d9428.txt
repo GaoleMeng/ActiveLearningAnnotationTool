@@ -1,0 +1,1 @@
+i have a question regard the process of program argument such as the geometri option sinc thi is a standard x option i m wonder wether i have to pars it manual or whether there is some predefin function that will do thi for me thank for ani info robret

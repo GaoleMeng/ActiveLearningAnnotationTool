@@ -1,0 +1,1 @@
+you can also set the foreground to the xor of the foreground and background color xsetforeground fg bg thi work great for me at least with truecolor visual

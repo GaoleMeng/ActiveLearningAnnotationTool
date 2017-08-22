@@ -1,0 +1,1 @@
+hi all i am studi the book unix desktop guid to open look there is an exampl winprop c that demonstr how to program wm_protocol properti in chapter 8 it can run but onli show the static text messag no notic pop_up what is the problem thank in advanc for help 1

@@ -1,0 +1,1 @@
+hi i need to know if there is a 256 color graphic mode that allow multipl page i want someth like mode 0x10 640x350x16 2 page i have been experi with graphic by call the bio with borland turbo c i feel like i am fly blind in thi area and could us all the help that you can give thank ivan ivan pulleyn univers of rochest e mail ip001b uhura cc rochest edu

@@ -1,0 +1,1 @@
+in articl 1993apr20 085638 29338 new uit no sp odin nosubdomain nodomain svein pedersen write i nead a util for updat delet ad chang ini file for window do i find it on ani ftp host svein in window 3 0 there is a built in call sysedit ex that is just what you need window 3 1 i don t know

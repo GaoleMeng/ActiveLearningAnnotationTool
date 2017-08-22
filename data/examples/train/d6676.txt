@@ -1,0 +1,1 @@
+intern do command certainli 3 3 and befor do not set the exit code thi is a royal pain if you want to do anyth which check for success delet etc the best suggest is to us 4do which doe return you exit code it also ha move command simon simon row srow fulcrum co uk fulcrum commun ltd birmingham

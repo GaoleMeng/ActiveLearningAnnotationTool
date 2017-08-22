@@ -1,0 +1,7 @@
+S1	c1:0.005 360 365	torqu
+S2	c1:0.009 453 457	gear
+S3	c1:0.015 398 402	auto
+S4	c1:0.008 712 718	clutch
+S5	c1:0.008 593 599	clutch
+S6	c1:0.007 688 695	acceler
+S7	c1:0.007 643 649	mechan

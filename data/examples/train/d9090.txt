@@ -1,0 +1,1 @@
+how can get a pixel valu from a drawabl without have to copi it to the client as an ximag and us xgetpixel i want to select pixel from an anim window on the server without have to copi the whole lot back to my client x11r5 ani pointer appreci gordon gordon c watson _ _ meteorolog depart edinburgh univers __________ scotland janet g c watson uk ac ed internet gcw met ed ac uk

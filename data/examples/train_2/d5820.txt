@@ -1,0 +1,1 @@
+help i am try to find softwar that will allow com port redirect under window for workgroup can anyon out there make a suggest or reccommend someth i would realli hate to have to write some driver for the serial port that would support the network but that is my next step thank in advanc bkv

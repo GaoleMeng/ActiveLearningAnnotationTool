@@ -1,0 +1,1 @@
+i ve been plai with a program call piclab to modifi some gif file the problem is it keep displai onli 50% of the imag start from the top it displai20% leav 20% blank then down anoth 20% etc anyon know what i m do wrong or is there anoth piec of softwar i should us instead thank for your toler

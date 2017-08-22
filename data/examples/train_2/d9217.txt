@@ -1,0 +1,1 @@
+i creat a pixmap or drawabl window then us xdrawlin function draw a line as below fingur width 300

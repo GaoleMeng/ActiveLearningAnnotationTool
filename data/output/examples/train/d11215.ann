@@ -1,0 +1,9 @@
+S1	c12:0.013 412 421	implement
+S2	c12:0.016 43 49	netcom
+S3	c12:0.018 409 411	de
+S4	c12:0.066 160 167	encrypt
+S5	c12:0.016 26 32	netcom
+S6	c12:0.016 172 179	decrypt
+S7	c12:0.013 528 537	implement
+S8	c12:0.018 192 194	de
+S9	c12:0.035 195 204	algorithm

@@ -1,0 +1,1 @@
+content problem with tabl widget in r5 the follow part of a program an user interfac for a simul system did work in r4 but refus to in r5 of caus the r4 version did not know about the xptablewidgetclass we us tablewidgetclass

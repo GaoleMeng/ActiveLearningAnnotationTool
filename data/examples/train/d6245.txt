@@ -1,0 +1,1 @@
+hi all i am work on a project in visual basic ver 2 0 and i need to show postcript file i am get from anoth aplic so becaus i can t show postscript directli form visual basic at least i don t know how i need a util to convert them to bmp wmf ani help will be appreshi kobi elimelech messg can be sent to me at kobi asimov hacktic nl

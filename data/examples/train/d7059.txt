@@ -1,0 +1,1 @@
+hi i have heard about a linear mode for the et4000 in which the 1mb video memori in linearli acces instead of the usual 64k page doe anyon know more about thi how can i enabl it and to what address is the video memori map to a mostert stellenbosch rsa mostert cs sun ac za

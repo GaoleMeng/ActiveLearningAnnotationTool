@@ -1,0 +1,1 @@
+i am look for a packag which take as input a set of geometr object defin by union of convex polytop specifi in some manner sai by inequ and equal and determin in some reason form thing like intersect union etc etc doe anyon know where i can find such a thing dan naiman depart of mathemat scienc john hopkin univers

@@ -1,0 +1,1 @@
+i want to do the equival of an xwininfo name via a call or set of call in xlib i need to map a window name to it id it s probabl easi but i ve onli been program in x for a littl while do you have the x sourc code simpli look in mit client xwininfo xwininfo c and you will find out exactli how to do it adrian nye o reilli and associ

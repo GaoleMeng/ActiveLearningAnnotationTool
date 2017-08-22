@@ -1,0 +1,11 @@
+S1	c1:0.009 182 190	detector
+S2	c1:0.008 1100 1105	radar
+S3	c1:0.009 342 350	detector
+S4	c1:0.008 798 803	radar
+S5	c1:0.012 476 481	brake
+S6	c1:0.008 256 261	radar
+S7	c1:0.009 927 935	detector
+S8	c1:0.018 317 322	speed
+S9	c1:0.008 903 908	radar
+S10	c1:0.009 622 630	detector
+S11	c1:0.008 616 621	radar

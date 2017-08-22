@@ -1,0 +1,1 @@
+try thi after xcreatewindow includ x11 xutil h displai displai window window xsizehint xsizehint xallocsizehint xsizehint flag usposit ussiz

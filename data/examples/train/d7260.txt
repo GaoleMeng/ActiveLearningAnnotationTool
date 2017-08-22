@@ -1,0 +1,1 @@
+do all scsi card for do system requir a separ devic driver to be load into memori for each scsi devic hook up will thi also be true of the 32 bit os s thank randi

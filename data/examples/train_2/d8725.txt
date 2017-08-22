@@ -1,0 +1,1 @@
+hi i am in the process of make the decis whether i should write c wrapper for motif myself or us motif or interview though i have download the tar file i fail to see ani document i have two question 1 if you have us these or similar c sy toolkit what ha been your experi 2 where do i find refer book document for them ani and all input will be greatli appreci unmesh

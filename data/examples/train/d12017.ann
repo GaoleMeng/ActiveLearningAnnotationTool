@@ -1,0 +1,13 @@
+S1	c13:0.004 212 219	current
+S2	c13:0.005 466 476	transistor
+S3	c13:0.013 232 238	voltag
+S4	c13:0.021 601 608	circuit
+S5	c13:0.013 643 649	output
+S6	c13:0.004 631 638	current
+S7	c13:0.004 699 706	current
+S8	c13:0.013 154 159	power
+S9	c13:0.006 160 166	suppli
+S10	c13:0.013 482 488	voltag
+S11	c13:0.021 340 347	circuit
+S12	c13:0.004 394 401	current
+S13	c13:0.005 612 618	detect

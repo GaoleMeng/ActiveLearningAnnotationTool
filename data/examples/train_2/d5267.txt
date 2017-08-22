@@ -1,0 +1,1 @@
+i m make a custom paint program in do and need an algorithm for read bitmap file like gif pcx or bmp doe anyon have such an algorithm i ve tri copi on out of a book for read pcx format but it doesn t work i will take an algorithm for ani format that can be creat from window paint thank toni

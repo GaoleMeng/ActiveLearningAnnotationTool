@@ -1,0 +1,1 @@
+libxaw3d the 3d athena widget set will greatli improv the sculptur look in linux with it share jump tabl lib you don t even have to recompil or relink you mere have to ln sf lib libxaw3d so 3 0 lib libxaw so 3 thoma

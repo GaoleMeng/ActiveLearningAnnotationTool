@@ -1,0 +1,13 @@
+S1	c9:0.008 366 375	processor
+S2	c9:0.006 113 119	socket
+S3	c9:0.008 275 284	processor
+S4	c9:0.006 212 218	socket
+S5	c9:0.008 74 76	pd
+S6	c9:0.033 351 355	appl
+S7	c9:0.005 491 499	ethernet
+S8	c9:0.007 485 490	lciii
+S9	c9:0.005 77 85	ethernet
+S10	c9:0.007 68 73	lciii
+S11	c9:0.008 157 160	fpu
+S12	c9:0.010 383 387	slot
+S13	c9:0.008 204 206	pd
