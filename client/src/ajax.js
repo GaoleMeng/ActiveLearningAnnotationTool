@@ -44,9 +44,6 @@ var Ajax = (function($, window, undefined) {
               }
 
 
-              // console.log(response.action);
-
-
               //retrain model demonstration:
               if (response.action == "getDocument"){
 

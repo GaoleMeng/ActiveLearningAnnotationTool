@@ -18,11 +18,7 @@ def run(input_dir, output_dir, is_sparse = True):
 	if not os.path.isdir(output_dir):
 		exit('[Learn module] output directory does not exist: "{}"'.format(output_dir))
 
-    # initialize = tf.global_variables_initializer()
-    # with tf.Session() as sess:
-    #     sess.run(initialize)
     
-
 	# read input data: documents, labels, and word embeddings
 	documents = read_documents(input_dir)
 	inst_labels = read_instance_labels(input_dir)
